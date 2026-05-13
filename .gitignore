@@ -1,0 +1,12 @@
+```
+# Environment
+.env
+.env.local
+.env.*
+
+# Editors
+.vscode/
+
+# Logs
+*.log
+```
