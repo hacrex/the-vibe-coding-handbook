@@ -1,12 +1,5 @@
-```
-# Environment
-.env
-.env.local
-.env.*
-
-# Editors
-.vscode/
-
-# Logs
-*.log
-```
+# Examples
+00-introduction/
+01-what-is-vibe-coding/
+02-how-to-start/
+03-hardware-guide/
