@@ -1,6 +1,18 @@
-# Examples folder documentation
-00-introduction/README.md
-01-what-is-vibe-coding/README.md
-02-how-to-start/README.md
-03-hardware-guide/README.md
-15-offline-vibe-coding/README.md
+```
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editors
+.vscode/
+.idea/
+
+# Original rules preserved
+*.log
+```
