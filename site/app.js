@@ -20,6 +20,8 @@
     initSmoothScroll();
     initFadeObserver();
     initScrollExplode();
+    initProgressExportImport();
+    initTocSearch();
   });
 
   function updateThemeIcon() {
@@ -103,13 +105,18 @@
     if (el) el.textContent = value;
   }
 
-  function renderPhases() {
+  function renderPhases(filterText) {
     var grid = document.getElementById('phasesGrid');
     if (!grid) return;
     var hasProgress = !!window.AIFSProgress;
     var html = '';
+    var filter = (filterText || '').toLowerCase().trim();
+    
     for (var i = 0; i < PHASES.length; i++) {
       var p = PHASES[i];
+      if (filter && p.name.toLowerCase().indexOf(filter) === -1 && String(p.id).indexOf(filter) === -1) {
+        continue;
+      }
       var total = p.lessons.length;
       var done = 0;
       for (var j = 0; j < p.lessons.length; j++) {
@@ -131,6 +138,11 @@
       html += '<span class="toc-meta">' + num + '</span>';
       html += '</div>';
     }
+    
+    if (html === '') {
+      html = '<div class="toc-empty">No phases match your search.</div>';
+    }
+    
     grid.innerHTML = html;
   }
 
@@ -430,5 +442,94 @@
     var div = document.createElement('div');
     div.textContent = str == null ? '' : str;
     return div.innerHTML;
+  }
+
+  function initTocSearch() {
+    var searchInput = document.getElementById('tocSearch');
+    if (!searchInput) return;
+    
+    searchInput.addEventListener('input', function () {
+      renderPhases(this.value);
+    });
+  }
+
+  function initProgressExportImport() {
+    var exportBtn = document.getElementById('exportProgressBtn');
+    var importBtn = document.getElementById('importProgressBtn');
+    var fileInput = document.getElementById('importFileInput');
+    
+    if (!exportBtn || !importBtn || !fileInput || !window.AIFSProgress) return;
+    
+    exportBtn.addEventListener('click', function () {
+      try {
+        var raw = localStorage.getItem('aifs:progress:v1');
+        if (!raw) {
+          alert('No progress data to export yet. Complete some lessons first!');
+          return;
+        }
+        var data = JSON.parse(raw);
+        var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'vibe-coding-progress-' + new Date().toISOString().slice(0, 10) + '.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        var originalText = exportBtn.innerHTML;
+        exportBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Exported!';
+        setTimeout(function () { exportBtn.innerHTML = originalText; }, 2000);
+      } catch (e) {
+        alert('Failed to export progress: ' + e.message);
+      }
+    });
+    
+    importBtn.addEventListener('click', function () {
+      fileInput.click();
+    });
+    
+    fileInput.addEventListener('change', function (e) {
+      var file = e.target.files[0];
+      if (!file) return;
+      
+      var reader = new FileReader();
+      reader.onload = function (event) {
+        try {
+          var data = JSON.parse(event.target.result);
+          if (!data || typeof data !== 'object' || !data.lessons) {
+            throw new Error('Invalid progress file format');
+          }
+          
+          if (!confirm('This will replace your current progress. Continue?')) {
+            fileInput.value = '';
+            return;
+          }
+          
+          localStorage.setItem('aifs:progress:v1', JSON.stringify(data));
+          window.AIFSProgress.onChange(function () {});
+          
+          populateStats();
+          renderPhases();
+          if (currentPhaseIdx >= 0 && PHASES[currentPhaseIdx]) {
+            renderModalLessons(PHASES[currentPhaseIdx]);
+          }
+          
+          var originalText = importBtn.innerHTML;
+          importBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Imported!';
+          setTimeout(function () { importBtn.innerHTML = originalText; }, 2000);
+        } catch (err) {
+          alert('Failed to import progress: ' + err.message);
+        } finally {
+          fileInput.value = '';
+        }
+      };
+      reader.onerror = function () {
+        alert('Failed to read file');
+        fileInput.value = '';
+      };
+      reader.readAsText(file);
+    });
   }
 })();

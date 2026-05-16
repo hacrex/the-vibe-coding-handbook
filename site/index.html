@@ -237,6 +237,32 @@
       margin-bottom: 32px;
     }
 
+    .toc-search-wrap {
+      max-width: 480px;
+      margin-bottom: 24px;
+    }
+
+    .toc-search {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--bg-surface);
+      border: 1px solid var(--rule-soft);
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .toc-search::placeholder {
+      color: var(--ink-mute);
+    }
+
+    .toc-search:focus {
+      border-color: var(--blueprint);
+    }
+
     .toc-list {
       display: flex;
       flex-direction: column;
@@ -605,6 +631,9 @@
     <section class="toc container" id="contents">
       <div class="toc-title reveal reveal--left">Learning Path · Comprehensive Handbook</div>
       <div class="toc-subtitle reveal" style="--stagger-delay: 80ms;">Explore topics from fundamentals to advanced AI-assisted development. Each section builds on the previous one.</div>
+      <div class="toc-search-wrap reveal" style="--stagger-delay: 120ms;">
+        <input type="text" class="toc-search" id="tocSearch" placeholder="Search phases...">
+      </div>
       <div class="toc-list" id="phasesGrid"></div>
       <div class="legend">
         <span class="legend-item"><span class="toc-status complete"></span> Complete</span>
@@ -639,6 +668,46 @@
           <div class="colophon-cmd">
             <code id="cloneCmd">git clone https://github.com/hacrex/the-vibe-coding-handbook.git</code>
             <button class="copy-btn" id="copyBtn" aria-label="Copy command" type="button">cp</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="progress-info container">
+      <div class="progress-info-grid">
+        <div class="progress-info-eyebrow reveal reveal--left">How Current Progress Works</div>
+        <div class="progress-info-body reveal" style="--stagger-delay: 100ms;">
+          <p>The progress tracking system is <strong>100% local</strong> (stored in your browser's localStorage):</p>
+          <div class="progress-steps">
+            <div class="progress-step">
+              <span class="progress-step-num">1</span>
+              <div class="progress-step-content">
+                <strong>Tracking:</strong> When you complete a lesson quiz in lesson.html, progress.js saves completion status to localStorage under key <code>aifs:progress:v1</code>
+              </div>
+            </div>
+            <div class="progress-step">
+              <span class="progress-step-num">2</span>
+              <div class="progress-step-content">
+                <strong>Display:</strong> On the homepage (index.html), the "Current Progress" section calls <code>computeStats()</code> which counts total lessons from data.js, checks localStorage for completed lessons, and calculates percentages for the progress bars
+              </div>
+            </div>
+            <div class="progress-step">
+              <span class="progress-step-num">3</span>
+              <div class="progress-step-content">
+                <strong>Sync:</strong> Progress syncs across tabs automatically via the storage event listener
+              </div>
+            </div>
+          </div>
+          <div class="progress-actions">
+            <button class="progress-action-btn" id="exportProgressBtn" type="button">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Export Progress
+            </button>
+            <button class="progress-action-btn" id="importProgressBtn" type="button">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Import Progress
+            </button>
+            <input type="file" id="importFileInput" accept=".json" style="display:none;" />
           </div>
         </div>
       </div>
