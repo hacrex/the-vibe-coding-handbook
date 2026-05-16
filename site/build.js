@@ -56,17 +56,71 @@ function parseRoadmap(content) {
 function parseReadme(content, roadmapStatuses) {
   const phases = [];
 
-  // Split into phase blocks
-  // Phase 0 is in a <table> block, phases 1-19 are in <details> blocks
-  // We'll parse line by line to extract phase headers and lesson tables
-
+  // Support two formats:
+  // 1. Old format: Phase headers with lesson tables (original)
+  // 2. New format: Section tables like "| [00-introduction](./00-introduction/) | Welcome & Overview | 🟡 In Progress |"
+  
   const lines = content.split('\n');
   let currentPhase = null;
   let inLessonTable = false;
   let isCapstoneTable = false;
+  
+  // Track sections for new format
+  let currentSectionGroup = null;
+  let sectionIdCounter = 0;
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
+
+    // === NEW FORMAT: Detect section group headers like "### 🏁 Foundations (Sections 00-06)" ===
+    const sectionGroupMatch = line.match(/^###\s+[^)]+\(Sections\s*(\d+)-(\d+)\)/);
+    if (sectionGroupMatch) {
+      const startNum = parseInt(sectionGroupMatch[1]);
+      currentSectionGroup = { start: startNum, sections: [] };
+      continue;
+    }
+    
+    // === NEW FORMAT: Parse section table rows ===
+    // Format: | [00-introduction](./00-introduction/) | Welcome & Overview | 🟡 In Progress |
+    if (currentSectionGroup && line.match(/^\|\s*\[?\d+-/)) {
+      const cols = line.split('|').map(c => c.trim()).filter(c => c.length > 0);
+      if (cols.length >= 3) {
+        const sectionCell = cols[0];
+        const titleCell = cols[1];
+        const statusCell = cols[2];
+        
+        // Extract section number and name from link
+        const linkMatch = sectionCell.match(/\[(\d+)-([^\]]+)\]\(([^)]+)\)/);
+        if (linkMatch) {
+          const sectionNum = parseInt(linkMatch[1]);
+          const sectionName = linkMatch[2].replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+          const relativePath = linkMatch[3];
+          
+          // Determine status from emoji
+          let phaseStatus = 'planned';
+          if (statusCell.includes('🟡')) phaseStatus = 'in-progress';
+          else if (statusCell.includes('✅')) phaseStatus = 'complete';
+          else if (statusCell.includes('⬚') || statusCell.includes('◻')) phaseStatus = 'planned';
+          
+          // Create a phase for each section
+          const phase = {
+            id: sectionNum,
+            name: sectionName,
+            status: phaseStatus,
+            desc: titleCell,
+            lessons: [{
+              name: titleCell,
+              status: phaseStatus,
+              type: 'Guide',
+              lang: '—',
+              url: GITHUB_BASE + relativePath.replace(/^\.\//, '')
+            }]
+          };
+          phases.push(phase);
+        }
+      }
+      continue;
+    }
 
     // Match Phase header - multiple formats supported:
     // Old: ### Phase 0: Setup & Tooling `12 lessons`
