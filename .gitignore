@@ -1,20 +1,18 @@
 ```
+# Build artifacts
+build/
+
 # Dependencies
 node_modules/
 
-# Build artifacts
-dist/
-build/
-target/
+# Logs and temp files
+*.log
+*.tmp
 
 # Environment
 .env
 .env.local
-.env.*
-
-# Logs and temporary files
-*.log
-*.tmp
+*.env.*
 
 # Editors
 .vscode/
@@ -26,7 +24,6 @@ __pycache__/
 *.pyo
 *.pyd
 
-# System files
-.DS_Store
-Thumbs.db
+# Original rules preserved
+*.log
 ```
