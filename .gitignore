@@ -1,12 +1,32 @@
-```markdown
-# Examples
-20-system-design/
-21-mobile-development/
-22-ai-agents/
-23-rag-vector-databases/
-24-automation/
-25-cheat-sheets/
-27-case-studies/
-28-failure-patterns/
-29-interview-prep/
+```
+# Dependencies
+node_modules/
+
+# Build artifacts
+dist/
+build/
+target/
+
+# Environment
+.env
+.env.local
+.env.*
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Editors
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# System files
+.DS_Store
+Thumbs.db
 ```
