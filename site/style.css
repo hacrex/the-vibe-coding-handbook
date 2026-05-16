@@ -4,9 +4,9 @@
   --font-mono: 'JetBrains Mono', ui-monospace, 'Consolas', monospace;
   --font-heading: var(--font-display);
 
-  --bg: #fafaf5;
-  --bg-surface: #f3f1e8;
-  --bg-surface-hover: #ece9dc;
+  --bg: #faf9f7;
+  --bg-surface: #f5f3ef;
+  --bg-surface-hover: #ede9e1;
   --ink: #1a1a1a;
   --ink-soft: #4a4a4a;
   --ink-mute: #7a7a78;
@@ -14,17 +14,17 @@
   --rule-soft: rgba(26, 26, 26, 0.16);
   --paper-rule: rgba(26, 26, 26, 0.08);
 
-  --blueprint: #3553ff;
-  --blueprint-tint: rgba(53, 83, 255, 0.08);
-  --blueprint-tint-strong: rgba(53, 83, 255, 0.18);
+  --blueprint: #d96c4f;
+  --blueprint-tint: rgba(217, 108, 79, 0.08);
+  --blueprint-tint-strong: rgba(217, 108, 79, 0.18);
 
-  --status-complete: #3553ff;
+  --status-complete: #d96c4f;
   --status-in-progress: #4a4a4a;
   --status-planned: #b8b6ad;
   --warn: #b8870f;
 
   --code-bg: #efece0;
-  --modal-bg: #fafaf5;
+  --modal-bg: #faf9f7;
   --overlay-bg: rgba(26, 26, 26, 0.55);
   --header-bg: rgba(250, 250, 245, 0.94);
 
@@ -34,7 +34,7 @@
   --text-muted: var(--ink-soft);
   --border: var(--rule-soft);
   --accent: var(--blueprint);
-  --accent-hover: #2840d6;
+  --accent-hover: #c55a3e;
   --secondary: var(--blueprint);
   --complete: var(--status-complete);
   --planned: var(--status-planned);
@@ -55,11 +55,11 @@
   --rule-soft: rgba(232, 230, 220, 0.18);
   --paper-rule: rgba(232, 230, 220, 0.08);
 
-  --blueprint: #6b8eff;
-  --blueprint-tint: rgba(107, 142, 255, 0.12);
-  --blueprint-tint-strong: rgba(107, 142, 255, 0.22);
+  --blueprint: #e08a6d;
+  --blueprint-tint: rgba(224, 138, 109, 0.12);
+  --blueprint-tint-strong: rgba(224, 138, 109, 0.22);
 
-  --status-complete: #6b8eff;
+  --status-complete: #e08a6d;
   --status-in-progress: #c8c6c0;
   --status-planned: #4a4a48;
   --warn: #d4a83d;
@@ -69,7 +69,7 @@
   --overlay-bg: rgba(10, 13, 26, 0.78);
   --header-bg: rgba(10, 13, 26, 0.94);
 
-  --accent-hover: #8aa5ff;
+  --accent-hover: #f0a48a;
 }
 
 *,
@@ -744,10 +744,11 @@ p.dropcap::first-letter {
 
 .footer-inner {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 16px;
+  text-align: center;
 }
 
 .footer-inner p {
@@ -756,6 +757,7 @@ p.dropcap::first-letter {
   letter-spacing: 0.06em;
   color: var(--ink-mute);
   text-transform: uppercase;
+  margin: 0;
 }
 
 .footer-links {
@@ -999,5 +1001,22 @@ body.js-anim .toc-row.in-view {
 @media (min-width: 1440px) {
   .container {
     max-width: 1240px;
+  }
+}
+
+/* Footer center alignment */
+.footer-center {
+  text-align: center !important;
+  flex: 100%;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+  .footer-center {
+    margin-bottom: 12px;
   }
 }

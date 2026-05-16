@@ -3,7 +3,7 @@
  * Loaded by every page that includes the .header-github component.
  */
 (function () {
-  var REPO = 'rohitg00/ai-engineering-from-scratch';
+  var REPO = 'hacrex/the-vibe-coding-handbook';
   var CACHE_KEY = 'gh:stars:' + REPO;
   var CACHE_TTL_MS = 10 * 60 * 1000; // 10 minutes
 
