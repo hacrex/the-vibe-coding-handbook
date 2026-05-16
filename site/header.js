@@ -1,5 +1,5 @@
 /**
- * Shared header behaviors: live GitHub star counter.
+ * Shared header behaviors: live GitHub star counter with animation.
  * Loaded by every page that includes the .header-github component.
  */
 (function () {
@@ -13,10 +13,37 @@
     return String(n);
   }
 
+  function animateCount(el, start, end) {
+    var duration = 1200;
+    var startTime = null;
+    
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = Math.round(start + (end - start) * eased);
+      el.textContent = format(current);
+      
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      } else {
+        el.textContent = format(end);
+      }
+    }
+    
+    window.requestAnimationFrame(step);
+  }
+
   function paint(n) {
     var els = document.querySelectorAll('.header-github .star-count, #starCount');
     for (var i = 0; i < els.length; i++) {
-      els[i].textContent = format(n);
+      var currentText = els[i].textContent;
+      var currentNum = parseInt(currentText.replace(/[^0-9]/g, ''), 10) || 0;
+      if (currentNum !== n) {
+        animateCount(els[i], currentNum, n);
+      } else {
+        els[i].textContent = format(n);
+      }
       els[i].removeAttribute('data-loading');
     }
   }
