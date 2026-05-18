@@ -12,9 +12,9 @@ target/
 .venv/
 venv/
 node_modules/
-.mypy_cache/
-.pytest_cache/
-.gradle/
+.julia/
+zig-cache/
+.deps/
 
 # Logs and temp files
 *.log
@@ -25,11 +25,13 @@ node_modules/
 # Environment
 .env
 .env.local
-*.env.*
+.env.*
 
 # Editors
 .vscode/
 .idea/
+*.swp
+*.swo
 
 # System files
 .DS_Store
