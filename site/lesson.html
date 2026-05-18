@@ -2866,7 +2866,7 @@
         ghApiFetch(lessonPath + '/outputs', function (err, data) {
           var el = document.getElementById('outputsContent');
           if (err || !data || !Array.isArray(data) || data.length === 0) {
-            el.innerHTML = '<div class="panel-fallback"><a href="https://github.com/hacrex/the-vibe-coding-handbook/tree/main/' + lessonPath + '">View lesson on GitHub</a></div>';
+            el.innerHTML = '<div class="panel-fallback">No outputs available for this lesson yet.</div>';
             return;
           }
 
@@ -2889,7 +2889,7 @@
             html += '<div class="output-card-name">' + escapeHtml(file.name) + '</div>';
             html += '<div class="output-desc" id="desc-' + idx + '">Loading description...</div>';
             html += '<div class="output-actions">';
-            html += '<a class="output-btn" href="' + file.html_url + '">View on GitHub</a>';
+            html += '<button class="output-btn" onclick="viewFileContent(\'' + file.download_url + '\', \'' + escapeAttr(file.name) + '\')">View Content</button>';
             if (installHint) {
               html += '<button class="output-btn" onclick="var h=document.getElementById(\'' + installId + '\');h.classList.toggle(\'visible\')">Install</button>';
             }
@@ -2924,7 +2924,7 @@
         ghApiFetch(lessonPath + '/code', function (err, data) {
           var el = document.getElementById('codeContent');
           if (err || !data || !Array.isArray(data) || data.length === 0) {
-            el.innerHTML = '<div class="panel-fallback"><a href="https://github.com/hacrex/the-vibe-coding-handbook/tree/main/' + lessonPath + '">View lesson on GitHub</a></div>';
+            el.innerHTML = '<div class="panel-fallback">No code files available for this lesson yet.</div>';
             return;
           }
 
@@ -2938,7 +2938,7 @@
             html += '<div class="code-card-size">' + formatSize(file.size) + '</div>';
             html += '<div class="code-card-run">' + escapeHtml(runCmd) + '</div>';
             html += '<div class="code-card-actions">';
-            html += '<a class="code-card-btn" href="' + file.html_url + '">View on GitHub</a>';
+            html += '<button class="code-card-btn" onclick="viewFileContent(\'' + file.download_url + '\', \'' + escapeAttr(file.name) + '\')">View Content</button>';
             html += '<button class="code-card-btn code-card-copy" data-command="' + escapeAttr(runCmd) + '">Copy command</button>';
             html += '</div>';
             html += '</div>';
@@ -3231,6 +3231,30 @@
 
       function escapeAttr(str) {
         return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+
+      function viewFileContent(url, filename) {
+        fetch(url)
+          .then(function(res) { return res.text(); })
+          .then(function(content) {
+            var modal = document.createElement('div');
+            modal.className = 'file-viewer-modal';
+            modal.innerHTML = '<div class="file-viewer-overlay"></div><div class="file-viewer"><div class="file-viewer-header"><span class="file-viewer-title">' + escapeHtml(filename) + '</span><button class="file-viewer-close">&times;</button></div><pre class="file-viewer-content">' + escapeHtml(content) + '</pre></div>';
+            document.body.appendChild(modal);
+            document.body.style.overflow = 'hidden';
+            
+            modal.querySelector('.file-viewer-close').addEventListener('click', function() {
+              document.body.removeChild(modal);
+              document.body.style.overflow = '';
+            });
+            modal.querySelector('.file-viewer-overlay').addEventListener('click', function() {
+              document.body.removeChild(modal);
+              document.body.style.overflow = '';
+            });
+          })
+          .catch(function(err) {
+            alert('Failed to load file content: ' + err.message);
+          });
       }
     })();
   </script>
