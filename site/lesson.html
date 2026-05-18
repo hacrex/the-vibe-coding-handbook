@@ -1820,7 +1820,7 @@
       }
 
       function fetchLesson(path) {
-        var rawUrl = 'https://raw.githubusercontent.com/hacrex/the-vibe-coding-handbook/main/' + path + '/docs/en.md';
+        var rawUrl = 'https://raw.githubusercontent.com/hacrex/the-vibe-coding-handbook/main/' + path + '/README.md';
         var quizUrl = 'https://raw.githubusercontent.com/hacrex/the-vibe-coding-handbook/main/' + path + '/quiz.json';
 
         fetch(rawUrl)
@@ -2353,7 +2353,17 @@
         text = text.replace(/\*(.+?)\*/g, '<em>$1</em>');
         text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
         text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function (m, label, href) {
-          return '<a href="' + href + '">' + label + '</a>';
+          // Convert GitHub blob/tree URLs to raw content URLs for in-site rendering
+          if (href.indexOf('github.com') !== -1 && href.indexOf('/blob/') !== -1) {
+            var rawUrl = href.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
+            return '<a href="' + rawUrl + '" target="_blank" rel="noopener">' + label + '</a>';
+          } else if (href.indexOf('github.com') !== -1 && href.indexOf('/tree/') !== -1) {
+            // For directory links, keep them as-is but open in new tab
+            return '<a href="' + href + '" target="_blank" rel="noopener">' + label + '</a>';
+          } else {
+            // Regular links open in same tab
+            return '<a href="' + href + '">' + label + '</a>';
+          }
         });
         return text;
       }
