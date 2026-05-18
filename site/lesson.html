@@ -2353,10 +2353,7 @@
         text = text.replace(/\*(.+?)\*/g, '<em>$1</em>');
         text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
         text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function (m, label, href) {
-          if (/^https?:\/\/|^mailto:/i.test(href)) {
-            return '<a href="' + href + '">' + label + '</a>';
-          }
-          return label;
+          return '<a href="' + href + '">' + label + '</a>';
         });
         return text;
       }
@@ -2869,7 +2866,7 @@
         ghApiFetch(lessonPath + '/outputs', function (err, data) {
           var el = document.getElementById('outputsContent');
           if (err || !data || !Array.isArray(data) || data.length === 0) {
-            el.innerHTML = '<div class="panel-fallback"><a href="https://github.com/hacrex/the-vibe-coding-handbook/tree/main/' + lessonPath + '" rel="noopener">View lesson on GitHub</a></div>';
+            el.innerHTML = '<div class="panel-fallback"><a href="https://github.com/hacrex/the-vibe-coding-handbook/tree/main/' + lessonPath + '">View lesson on GitHub</a></div>';
             return;
           }
 
@@ -2927,7 +2924,7 @@
         ghApiFetch(lessonPath + '/code', function (err, data) {
           var el = document.getElementById('codeContent');
           if (err || !data || !Array.isArray(data) || data.length === 0) {
-            el.innerHTML = '<div class="panel-fallback"><a href="https://github.com/hacrex/the-vibe-coding-handbook/tree/main/' + lessonPath + '" rel="noopener">View lesson on GitHub</a></div>';
+            el.innerHTML = '<div class="panel-fallback"><a href="https://github.com/hacrex/the-vibe-coding-handbook/tree/main/' + lessonPath + '">View lesson on GitHub</a></div>';
             return;
           }
 
