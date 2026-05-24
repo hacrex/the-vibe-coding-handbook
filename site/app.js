@@ -45,6 +45,10 @@
   }
 
   function computeStats() {
+    if (typeof PHASES === 'undefined') {
+      console.error('PHASES is not defined. Ensure data.js is loaded before app.js.');
+      return { lessons: 0, phases: 0, complete: 0, completePhases: 0 };
+    }
     var totalLessons = 0;
     var completeLessons = 0;
     var hasProgress = !!window.AIFSProgress;
@@ -106,6 +110,10 @@
   }
 
   function renderPhases(filterText) {
+    if (typeof PHASES === 'undefined') {
+      console.error('PHASES is not defined. Ensure data.js is loaded before app.js.');
+      return;
+    }
     var grid = document.getElementById('phasesGrid');
     if (!grid) return;
     var hasProgress = !!window.AIFSProgress;
@@ -199,6 +207,10 @@
   var currentPhaseIdx = -1;
 
   function openModal(idx) {
+    if (typeof PHASES === 'undefined') {
+      console.error('PHASES is not defined. Ensure data.js is loaded before app.js.');
+      return;
+    }
     var p = PHASES[idx];
     if (!p) return;
     currentPhaseIdx = idx;
