@@ -964,9 +964,16 @@
       for (var li = 0; li < lessonsArray.length; li++) {
         var lesson = lessonsArray[li];
         if (!lesson.url) continue;
-        var pm = lesson.url.match(/(phases\/[^/]+\/[^/]+)\/?$/);
-        if (pm) {
-          readLink = 'lesson.html?path=' + encodeURI(pm[1]);
+        var lessonPath = '';
+        var mTree = lesson.url.match(/tree\/main\/(.+?)\/?$/);
+        if (mTree) {
+          lessonPath = mTree[1];
+        } else {
+          var pm = lesson.url.match(/(phases\/[^/]+\/[^/]+)\/?$/);
+          if (pm) lessonPath = pm[1];
+        }
+        if (lessonPath) {
+          readLink = 'lesson.html?path=' + encodeURI(lessonPath);
           break;
         }
       }

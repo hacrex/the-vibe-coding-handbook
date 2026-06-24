@@ -329,9 +329,19 @@
           for (var j = 0; j < p.lessons.length; j++) {
             var l = p.lessons[j];
             // Generate local lesson path instead of GitHub URL
-            var lessonSlug = String(j + 1).padStart(2, '0') + '-' + l.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-            var phaseSlug = String(p.id).padStart(2, '0') + '-' + p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-            var localPath = 'lesson.html?path=phases/' + phaseSlug + '/' + lessonSlug;
+            var lessonPath = '';
+            if (l.url) {
+              var mTree = l.url.match(/tree\/main\/(.+?)\/?$/);
+              if (mTree) {
+                lessonPath = mTree[1];
+              }
+            }
+            if (!lessonPath) {
+              var lessonSlug = String(j + 1).padStart(2, '0') + '-' + l.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+              var phaseSlug = String(p.id).padStart(2, '0') + '-' + p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+              lessonPath = 'phases/' + phaseSlug + '/' + lessonSlug;
+            }
+            var localPath = 'lesson.html?path=' + lessonPath;
             allRows.push({
               phase: p.id,
               phaseName: p.name,

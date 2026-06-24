@@ -1669,7 +1669,7 @@
       var lessonPath = params.get('path');
 
       if (!lessonPath) {
-        showError('No lesson path specified', 'Add ?path=phases/01-math-foundations/01-linear-algebra-intuition to the URL.');
+        showError('No lesson path specified', 'Add ?path=01-what-is-vibe-coding to the URL.');
         return;
       }
 
@@ -1693,6 +1693,16 @@
           for (var j = 0; j < p.lessons.length; j++) {
             var l = p.lessons[j];
             var lSlug = extractLessonSlug(l, j);
+            
+            var lessonPathVal = '';
+            if (l.url) {
+              var mTree = l.url.match(/tree\/main\/(.+?)\/?$/);
+              if (mTree) lessonPathVal = mTree[1];
+            }
+            if (!lessonPathVal) {
+              lessonPathVal = 'phases/' + pSlug + '/' + lSlug;
+            }
+
             flatLessons.push({
               phaseIndex: i,
               lessonIndex: j,
@@ -1705,12 +1715,17 @@
               type: l.type,
               lang: l.lang,
               url: l.url,
-              path: 'phases/' + pSlug + '/' + lSlug,
+              path: lessonPathVal,
               isReadable: l.status === 'complete' || !!l.url
             });
             if (pSlug === currentPhaseSlug && lSlug === currentLessonSlug) {
               currentPhaseIndex = i;
               currentLessonIndex = flatLessons.length - 1;
+            } else if (lessonPathVal === lessonPath) {
+              currentPhaseIndex = i;
+              currentLessonIndex = flatLessons.length - 1;
+              currentPhaseSlug = pSlug;
+              currentLessonSlug = lSlug;
             }
           }
         }
@@ -1754,15 +1769,15 @@
           html += '<div class="sidebar-phase-nav">';
           if (prevPhaseIdx >= 0) {
             var pp = PHASES[prevPhaseIdx];
-            var ppSlug = extractPhaseSlug(pp, prevPhaseIdx);
-            var ppFirstLesson = pp.lessons[0] ? extractLessonSlug(pp.lessons[0], 0) : '';
-            html += '<a href="lesson.html?path=phases/' + ppSlug + '/' + ppFirstLesson + '">&larr; Phase ' + String(pp.id).padStart(2, '0') + ': ' + escapeHtml(pp.name) + '</a>';
+            var ppFirstLesson = flatLessons.find(function (fl) { return fl.phaseIndex === prevPhaseIdx && fl.lessonIndex === 0; });
+            var ppPath = ppFirstLesson ? ppFirstLesson.path : '';
+            html += '<a href="lesson.html?path=' + ppPath + '">&larr; Phase ' + String(pp.id).padStart(2, '0') + ': ' + escapeHtml(pp.name) + '</a>';
           }
           if (nextPhaseIdx >= 0) {
             var np = PHASES[nextPhaseIdx];
-            var npSlug = extractPhaseSlug(np, nextPhaseIdx);
-            var npFirstLesson = np.lessons[0] ? extractLessonSlug(np.lessons[0], 0) : '';
-            html += '<a href="lesson.html?path=phases/' + npSlug + '/' + npFirstLesson + '">Phase ' + String(np.id).padStart(2, '0') + ': ' + escapeHtml(np.name) + ' &rarr;</a>';
+            var npFirstLesson = flatLessons.find(function (fl) { return fl.phaseIndex === nextPhaseIdx && fl.lessonIndex === 0; });
+            var npPath = npFirstLesson ? npFirstLesson.path : '';
+            html += '<a href="lesson.html?path=' + npPath + '">Phase ' + String(np.id).padStart(2, '0') + ': ' + escapeHtml(np.name) + ' &rarr;</a>';
           }
           html += '</div>';
         }
@@ -1776,8 +1791,12 @@
             var pSlugCurrent = extractPhaseSlug(phase, currentPhaseIndex);
             var isActive = lesSlug === currentLessonSlug;
             var lesReadable = les.status === 'complete' || !!les.url;
+            
+            var flObj = flatLessons.find(function (fl) { return fl.phaseIndex === currentPhaseIndex && fl.lessonIndex === k; });
+            var lesPath = flObj ? flObj.path : 'phases/' + pSlugCurrent + '/' + lesSlug;
+
             if (lesReadable) {
-              html += '<a class="sidebar-lesson-link' + (isActive ? ' active' : '') + '" href="lesson.html?path=phases/' + pSlugCurrent + '/' + lesSlug + '">';
+              html += '<a class="sidebar-lesson-link' + (isActive ? ' active' : '') + '" href="lesson.html?path=' + lesPath + '">';
             } else {
               html += '<span class="sidebar-lesson-link disabled">';
             }
@@ -3220,9 +3239,9 @@
 
         html += '<div class="continue-links">';
 
-        var phaseSlug = extractPhaseSlug(phase, phaseIdx);
-        var firstLesson = phase.lessons[0] ? extractLessonSlug(phase.lessons[0], 0) : '';
-        html += '<a class="continue-link" href="lesson.html?path=phases/' + phaseSlug + '/' + firstLesson + '">Browse all Phase ' + String(phase.id).padStart(2, '0') + ' lessons</a>';
+        var firstLessonObj = flatLessons.find(function (fl) { return fl.phaseIndex === phaseIdx && fl.lessonIndex === 0; });
+        var firstLessonPath = firstLessonObj ? firstLessonObj.path : '';
+        html += '<a class="continue-link" href="lesson.html?path=' + firstLessonPath + '">Browse all Phase ' + String(phase.id).padStart(2, '0') + ' lessons</a>';
         html += '<a class="continue-link" href="catalog.html">Full course catalog</a>';
         html += '</div>';
 

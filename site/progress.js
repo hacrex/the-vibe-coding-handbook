@@ -123,6 +123,8 @@
 
   function extractPath(url) {
     if (!url) return '';
+    var mTree = String(url).match(/tree\/main\/(.+?)\/?$/);
+    if (mTree) return mTree[1];
     var m = String(url).match(/(phases\/[^/]+\/[^/]+)\/?/);
     return m ? m[1] : '';
   }

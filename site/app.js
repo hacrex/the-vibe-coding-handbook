@@ -235,8 +235,16 @@
 
     for (var i = 0; i < p.lessons.length; i++) {
       var l = p.lessons[i];
-      var pathMatch = l.url ? l.url.match(/(phases\/[^/]+\/[^/]+)\/?$/) : null;
-      var lessonPath = pathMatch ? pathMatch[1] : '';
+      var lessonPath = '';
+      if (l.url) {
+        var mTree = l.url.match(/tree\/main\/(.+?)\/?$/);
+        if (mTree) {
+          lessonPath = mTree[1];
+        } else {
+          var m = l.url.match(/(phases\/[^/]+\/[^/]+)\/?$/);
+          if (m) lessonPath = m[1];
+        }
+      }
       var userComplete = hasProgress && lessonPath && window.AIFSProgress.isLessonComplete(lessonPath);
       if (userComplete) userDone++;
 
