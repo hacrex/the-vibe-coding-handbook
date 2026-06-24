@@ -149,13 +149,15 @@
 
   // Cross-tab sync: if user clears or updates progress in another tab,
   // refresh listeners here too.
-  window.addEventListener('storage', function (e) {
-    if (e.key !== STORAGE_KEY) return;
-    var state = read();
-    for (var i = 0; i < listeners.length; i++) {
-      try { listeners[i](state); } catch (_) {}
-    }
-  });
+  if (typeof window !== 'undefined' && window.addEventListener) {
+    window.addEventListener('storage', function (e) {
+      if (e.key !== STORAGE_KEY) return;
+      var state = read();
+      for (var i = 0; i < listeners.length; i++) {
+        try { listeners[i](state); } catch (_) {}
+      }
+    });
+  }
 
   window.AIFSProgress = {
     recordVisit: recordVisit,
