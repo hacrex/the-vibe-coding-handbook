@@ -46,6 +46,12 @@
       }
       els[i].removeAttribute('data-loading');
     }
+    // Also update the hero CTA star count (no animation, just display)
+    var heroCount = document.getElementById('heroStarCount');
+    if (heroCount) {
+      heroCount.textContent = format(n);
+      heroCount.removeAttribute('data-loading');
+    }
   }
 
   function readCache() {

@@ -101,6 +101,29 @@ body {
   transition: background-color 0.2s, color 0.2s;
 }
 
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 9999;
+  background: var(--blueprint);
+  color: var(--bg);
+  padding: 12px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  left: 16px;
+  top: 16px;
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -1289,4 +1312,80 @@ body.js-anim .toc-row.in-view {
   border-color: var(--accent);
   color: var(--accent);
   background: var(--bg-surface-hover);
+}
+
+/* ─── Masthead CTA Buttons ─────────────────────────────────────────────────── */
+.masthead-cta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.masthead-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid var(--ink);
+  background: var(--bg);
+  color: var(--ink);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.masthead-btn:hover,
+.masthead-btn:focus-visible {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+.masthead-btn--primary {
+  border-color: var(--blueprint);
+  color: var(--blueprint);
+}
+
+.masthead-btn--primary:hover,
+.masthead-btn--primary:focus-visible {
+  background: var(--blueprint);
+  color: var(--bg);
+  border-bottom-color: var(--blueprint);
+}
+
+.masthead-btn svg {
+  flex-shrink: 0;
+}
+
+.masthead-btn-count {
+  padding-left: 8px;
+  margin-left: 4px;
+  border-left: 1px solid currentColor;
+  opacity: 0.75;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 480px) {
+  .masthead-btn {
+    font-size: 0.75rem;
+    padding: 8px 12px;
+  }
+  .masthead-cta {
+    gap: 8px;
+  }
+}
+
+/* ─── TOC Empty State ──────────────────────────────────────────────────────── */
+.toc-empty {
+  padding: 32px 0;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.96rem;
+  color: var(--ink-soft);
+  font-style: italic;
 }
