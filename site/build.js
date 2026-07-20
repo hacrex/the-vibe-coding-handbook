@@ -93,7 +93,9 @@ function parseReadme(content, roadmapStatuses) {
         const linkMatch = sectionCell.match(/\[(\d+)-([^\]]+)\]\(([^)]+)\)/);
         if (linkMatch) {
           const sectionNum = parseInt(linkMatch[1]);
-          const sectionName = linkMatch[2].replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+          const rawName = linkMatch[2].replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+          const NAME_FIXES = { 'Ai': 'AI', 'Rag': 'RAG', 'Ide': 'IDE', 'Ides': 'IDEs', 'Ids': 'IDs', 'Devops': 'DevOps', 'Nosql': 'NoSQL', 'Sql': 'SQL', 'Rest Api': 'REST API', 'Api': 'API', 'Json': 'JSON', 'Llm': 'LLM', 'Ui': 'UI', 'Ux': 'UX', 'Css': 'CSS', 'Html': 'HTML', 'Js': 'JS', 'Ts': 'TS' };
+          const sectionName = rawName.replace(/\b[A-Za-z\/]+\b/g, function (m) { return NAME_FIXES[m] || m; });
           const relativePath = linkMatch[3];
           
           // Determine status from emoji

@@ -1800,7 +1800,7 @@
             } else {
               html += '<span class="sidebar-lesson-link disabled">';
             }
-            html += '<span class="sidebar-lesson-dot ' + les.status + '"></span>';
+            html += '<span class="sidebar-lesson-dot ' + les.status + '" role="img" aria-label="' + les.status.replace(/-/g, ' ') + '"></span>';
             html += escapeHtml(les.name);
             html += lesReadable ? '</a>' : '</span>';
           }
@@ -1838,15 +1838,45 @@
         }, { passive: true });
       }
 
+      var LESSON_CACHE_PREFIX = 'aifs:lesson:';
+      var LESSON_CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
+
+      function readCache(key) {
+        try {
+          var raw = localStorage.getItem(key);
+          if (!raw) return null;
+          var parsed = JSON.parse(raw);
+          if (Date.now() - parsed.t > LESSON_CACHE_TTL) return null;
+          return parsed.v;
+        } catch (e) { return null; }
+      }
+
+      function writeCache(key, value) {
+        try {
+          localStorage.setItem(key, JSON.stringify({ v: value, t: Date.now() }));
+        } catch (e) { /* quota exceeded, fail silently */ }
+      }
+
+      function fetchWithCache(url, cacheKey, asText) {
+        var cached = readCache(cacheKey);
+        if (cached !== null) return Promise.resolve(cached);
+
+        return fetch(url).then(function (res) {
+          if (!res.ok) throw new Error('fetch-failed');
+          return asText ? res.text() : res.json();
+        }).then(function (data) {
+          writeCache(cacheKey, data);
+          return data;
+        });
+      }
+
       function fetchLesson(path) {
         var rawUrl = 'https://raw.githubusercontent.com/hacrex/the-vibe-coding-handbook/main/' + path + '/README.md';
         var quizUrl = 'https://raw.githubusercontent.com/hacrex/the-vibe-coding-handbook/main/' + path + '/quiz.json';
+        var mdCacheKey = LESSON_CACHE_PREFIX + path + ':md';
+        var quizCacheKey = LESSON_CACHE_PREFIX + path + ':quiz';
 
-        fetch(rawUrl)
-          .then(function (res) {
-            if (!res.ok) throw new Error('fetch-failed');
-            return res.text();
-          })
+        fetchWithCache(rawUrl, mdCacheKey, true)
           .then(function (md) {
             try {
               renderLesson(md);
@@ -1855,14 +1885,13 @@
               showError('Render error', 'Loaded the lesson markdown but failed to render it. Details in the browser console.');
               return;
             }
-            fetch(quizUrl)
-              .then(function (res) { return res.ok ? res.json() : null; })
-              .catch(function () { return null; })
+            fetchWithCache(quizUrl, quizCacheKey, false)
               .then(function (data) {
                 if (!data) return;
                 try { renderQuiz(data); }
                 catch (err) { console.error('renderQuiz failed', err); }
-              });
+              })
+              .catch(function () {});
           })
           .catch(function () {
             showError('Lesson not found', 'Could not fetch the lesson at <code>' + escapeHtml(path) + '</code>. It may not have been written yet.');
@@ -2372,16 +2401,23 @@
         text = text.replace(/\*(.+?)\*/g, '<em>$1</em>');
         text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
         text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function (m, label, href) {
+          // Block dangerous URI schemes
+          var schemeMatch = href.match(/^\s*([a-zA-Z][a-zA-Z0-9+\-.]*):/);
+          if (schemeMatch) {
+            var scheme = schemeMatch[1].toLowerCase();
+            if (scheme !== 'http' && scheme !== 'https' && scheme !== 'mailto') {
+              return label;
+            }
+          }
+          var safeHref = escapeAttr(href);
           // Convert GitHub blob/tree URLs to raw content URLs for in-site rendering
           if (href.indexOf('github.com') !== -1 && href.indexOf('/blob/') !== -1) {
             var rawUrl = href.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
-            return '<a href="' + rawUrl + '" target="_blank" rel="noopener">' + label + '</a>';
+            return '<a href="' + escapeAttr(rawUrl) + '" target="_blank" rel="noopener">' + label + '</a>';
           } else if (href.indexOf('github.com') !== -1 && href.indexOf('/tree/') !== -1) {
-            // For directory links, keep them as-is but open in new tab
-            return '<a href="' + href + '" target="_blank" rel="noopener">' + label + '</a>';
+            return '<a href="' + safeHref + '" target="_blank" rel="noopener">' + label + '</a>';
           } else {
-            // Regular links open in same tab
-            return '<a href="' + href + '">' + label + '</a>';
+            return '<a href="' + safeHref + '">' + label + '</a>';
           }
         });
         return text;

@@ -22,6 +22,7 @@
     initScrollExplode();
     initProgressExportImport();
     initTocSearch();
+    initContinueBar();
   });
 
   function updateThemeIcon() {
@@ -141,7 +142,7 @@
       var num = String(p.id).padStart(2, '0');
       html += '<div class="toc-row" data-phase="' + i + '">';
       html += '<span class="toc-num">' + roman + '.</span>';
-      html += '<div><span class="toc-status ' + statusClass + '"></span><span class="toc-name">' + escapeHtml(p.name) + '</span></div>';
+      html += '<div><span class="toc-status ' + statusClass + '" role="img" aria-label="' + statusClass.replace(/-/g, ' ') + '"></span><span class="toc-name">' + escapeHtml(p.name) + '</span></div>';
       html += '<span class="toc-meta">' + done + ' / ' + total + '</span>';
       html += '<span class="toc-meta">' + num + '</span>';
       html += '</div>';
@@ -180,6 +181,7 @@
     document.addEventListener('click', function (e) {
       var row = e.target.closest('.toc-row, .phase-card');
       if (row) {
+        lastModalTrigger = e.target;
         var idx = parseInt(row.getAttribute('data-phase'), 10);
         if (!isNaN(idx)) openModal(idx);
       }
@@ -190,7 +192,34 @@
       if (e.target === overlay) closeModal();
     });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeModal();
+      if (!overlay.classList.contains('open')) return;
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeModal();
+        return;
+      }
+      if (e.key === 'Tab') {
+        var modal = document.getElementById('modal');
+        var focusables = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        var enabled = [];
+        for (var i = 0; i < focusables.length; i++) {
+          if (!focusables[i].disabled && focusables[i].offsetParent !== null) enabled.push(focusables[i]);
+        }
+        if (!enabled.length) return;
+        var first = enabled[0];
+        var last = enabled[enabled.length - 1];
+        if (e.shiftKey) {
+          if (document.activeElement === first || document.activeElement === overlay) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }
     });
 
     var resetBtn = document.getElementById('modalReset');
@@ -205,6 +234,7 @@
   }
 
   var currentPhaseIdx = -1;
+  var lastModalTrigger = null;
 
   function openModal(idx) {
     if (typeof PHASES === 'undefined') {
@@ -214,6 +244,7 @@
     var p = PHASES[idx];
     if (!p) return;
     currentPhaseIdx = idx;
+    lastModalTrigger = document.activeElement;
 
     document.getElementById('modalPhaseNum').textContent = 'PHASE ' + String(p.id).padStart(2, '0');
     document.getElementById('modalTitle').textContent = p.name;
@@ -223,6 +254,7 @@
 
     document.getElementById('modalOverlay').classList.add('open');
     document.body.style.overflow = 'hidden';
+    document.getElementById('modalClose').focus();
   }
 
   function renderModalLessons(p) {
@@ -252,7 +284,7 @@
       if (userComplete) statusClass = 'complete';
 
       html += '<div class="modal-lesson' + (userComplete ? ' user-done' : '') + '">';
-      html += '<span class="modal-lesson-status ' + statusClass + '"' + (userComplete ? ' title="You completed this lesson"' : '') + '></span>';
+      html += '<span class="modal-lesson-status ' + statusClass + '" role="img" aria-label="' + (userComplete ? 'completed' : statusClass.replace(/-/g, ' ')) + '"' + (userComplete ? ' title="You completed this lesson"' : '') + '></span>';
       if (l.url) {
         html += '<a href="' + l.url + '">' + escapeHtml(l.name) + '</a>';
       } else {
@@ -322,6 +354,10 @@
   function closeModal() {
     document.getElementById('modalOverlay').classList.remove('open');
     document.body.style.overflow = '';
+    if (lastModalTrigger && typeof lastModalTrigger.focus === 'function') {
+      lastModalTrigger.focus();
+    }
+    lastModalTrigger = null;
   }
 
   function initCopyButton() {
@@ -467,10 +503,58 @@
   function initTocSearch() {
     var searchInput = document.getElementById('tocSearch');
     if (!searchInput) return;
-    
+
     searchInput.addEventListener('input', function () {
       renderPhases(this.value);
     });
+  }
+
+  function initContinueBar() {
+    var bar = document.getElementById('continueBar');
+    var link = document.getElementById('continueBarLink');
+    var nameEl = document.getElementById('continueBarName');
+    if (!bar || !link || !nameEl || !window.AIFSProgress) return;
+
+    var state;
+    try {
+      var raw = localStorage.getItem('aifs:progress:v1');
+      if (!raw) return;
+      state = JSON.parse(raw);
+      if (!state || !state.lessons) return;
+    } catch (e) { return; }
+
+    var lastPath = null;
+    var lastVisited = 0;
+    for (var k in state.lessons) {
+      var visited = state.lessons[k].visitedAt || 0;
+      if (visited > lastVisited) {
+        lastVisited = visited;
+        lastPath = k;
+      }
+    }
+    if (!lastPath) return;
+
+    var lessonName = '';
+    if (typeof PHASES !== 'undefined') {
+      for (var i = 0; i < PHASES.length; i++) {
+        for (var j = 0; j < PHASES[i].lessons.length; j++) {
+          var l = PHASES[i].lessons[j];
+          if (l.url && l.url.indexOf(lastPath) !== -1) {
+            lessonName = l.name;
+            break;
+          }
+        }
+        if (lessonName) break;
+      }
+    }
+    if (!lessonName) {
+      var parts = lastPath.split('/');
+      lessonName = parts[parts.length - 1].replace(/^\d+-/, '').replace(/-/g, ' ');
+    }
+
+    nameEl.textContent = lessonName;
+    link.href = 'lesson.html?path=' + lastPath;
+    bar.style.display = '';
   }
 
   function initProgressExportImport() {

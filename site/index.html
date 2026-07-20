@@ -694,6 +694,16 @@
       </div>
     </section>
 
+    <section class="continue-bar container" id="continueBar" style="display:none;">
+      <div class="continue-bar-inner">
+        <div class="continue-bar-label">Continue where you left off</div>
+        <a class="continue-bar-link" id="continueBarLink" href="#">
+          <span class="continue-bar-name" id="continueBarName"></span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </section>
+
     <section class="toc container" id="contents">
       <div class="toc-title reveal reveal--left">Learning Path · Comprehensive Handbook</div>
       <div class="toc-subtitle reveal" style="--stagger-delay: 80ms;">Explore topics from fundamentals to advanced AI-assisted development. Each section builds on the previous one.</div>
@@ -702,9 +712,9 @@
       </div>
       <div class="toc-list" id="phasesGrid"></div>
       <div class="legend">
-        <span class="legend-item"><span class="toc-status complete"></span> Complete</span>
-        <span class="legend-item"><span class="toc-status in-progress"></span> In progress</span>
-        <span class="legend-item"><span class="toc-status planned"></span> Planned</span>
+        <span class="legend-item"><span class="toc-status complete" role="img" aria-label="complete"></span> Complete</span>
+        <span class="legend-item"><span class="toc-status in-progress" role="img" aria-label="in progress"></span> In progress</span>
+        <span class="legend-item"><span class="toc-status planned" role="img" aria-label="planned"></span> Planned</span>
       </div>
     </section>
 

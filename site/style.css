@@ -1389,3 +1389,158 @@ body.js-anim .toc-row.in-view {
   color: var(--ink-soft);
   font-style: italic;
 }
+
+/* ─── Continue Bar ─────────────────────────────────────────────────────────── */
+.continue-bar {
+  padding: 32px 0;
+  border-top: 1px solid var(--rule-soft);
+}
+
+.continue-bar-inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: var(--blueprint-tint);
+  border: 1px solid var(--blueprint);
+}
+
+.continue-bar-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blueprint);
+  white-space: nowrap;
+}
+
+.continue-bar-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: none;
+  transition: color 0.15s;
+}
+
+.continue-bar-link:hover {
+  color: var(--blueprint);
+}
+
+.continue-bar-link svg {
+  flex-shrink: 0;
+  color: var(--blueprint);
+}
+
+@media (max-width: 768px) {
+  .continue-bar-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+/* ─── Print ────────────────────────────────────────────────────────────────── */
+@media print {
+  .site-header,
+  .lesson-sidebar,
+  .lesson-sidebar-toggle,
+  .toc-sidebar,
+  .scroll-progress,
+  .theme-toggle,
+  .site-footer,
+  .modal-overlay,
+  .mermaid-modal-overlay,
+  .continue-bar,
+  .progress-actions,
+  .lesson-nav-bottom,
+  .ai-panels,
+  .code-copy,
+  .mermaid-toolbar,
+  .quiz-section,
+  .copy-btn,
+  .header-github {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 12pt;
+    line-height: 1.5;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .lesson-layout {
+    display: block;
+    padding-top: 0;
+  }
+
+  .lesson-main {
+    margin-left: 0;
+    padding: 0;
+  }
+
+  .lesson-article {
+    max-width: 100%;
+  }
+
+  .lesson-article h1 {
+    font-size: 24pt;
+    color: #000;
+    border-bottom-color: #000;
+  }
+
+  .lesson-article h2 {
+    font-size: 18pt;
+    color: #000;
+  }
+
+  .lesson-article pre {
+    border: 1px solid #ccc;
+    page-break-inside: avoid;
+  }
+
+  .lesson-article pre code {
+    font-size: 9pt;
+  }
+
+  .lesson-article a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  .lesson-article a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+
+  .lesson-article a[href^="#"]::after,
+  .lesson-article a[href^="javascript"]::after {
+    content: "";
+  }
+
+  .lesson-article table {
+    page-break-inside: avoid;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .ascii-rule {
+    background: #000;
+    height: 2px;
+  }
+
+  a {
+    color: #000;
+  }
+}
