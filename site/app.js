@@ -15,7 +15,7 @@
     populateStats();
     renderPhases();
     initStaggerIndex();
-    initModal();
+    // initModal();
     initCopyButton();
     initSmoothScroll();
     initFadeObserver();
