@@ -285,7 +285,11 @@
 
       html += '<div class="modal-lesson' + (userComplete ? ' user-done' : '') + '">';
       html += '<span class="modal-lesson-status ' + statusClass + '" role="img" aria-label="' + (userComplete ? 'completed' : statusClass.replace(/-/g, ' ')) + '"' + (userComplete ? ' title="You completed this lesson"' : '') + '></span>';
-      html += '<a href="catalog.html?phase=' + p.id + '">' + escapeHtml(l.name) + '</a>';
+      if (l.url) {
+        html += '<a href="' + l.url + '">' + escapeHtml(l.name) + '</a>';
+      } else {
+        html += '<a>' + escapeHtml(l.name) + '</a>';
+      }
       html += '<span class="modal-lesson-type" data-type="' + escapeHtml(l.type) + '"' + (l.combines ? ' title="Combines: ' + escapeHtml(l.combines) + '"' : '') + '>' + escapeHtml(l.type) + '</span>';
       html += '<span class="modal-lesson-lang">' + escapeHtml(l.lang) + '</span>';
 

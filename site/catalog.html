@@ -439,11 +439,6 @@
           try { searchInput.focus({ preventScroll: true }); } catch (_) { searchInput.focus(); }
         }
 
-        var urlPhase = new URLSearchParams(window.location.search).get('phase');
-        if (urlPhase !== null && urlPhase !== '') {
-          phaseSelect.value = urlPhase;
-        }
-
         searchInput.addEventListener('input', render);
         phaseSelect.addEventListener('change', render);
         statusSelect.addEventListener('change', render);
