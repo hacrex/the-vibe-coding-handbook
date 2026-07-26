@@ -103,4 +103,21 @@
   } else {
     load();
   }
+
+  // Mobile nav toggle
+  document.addEventListener('DOMContentLoaded', function () {
+    var hamburger = document.getElementById('navHamburger');
+    var mobileNav = document.getElementById('mobileNav');
+    if (!hamburger || !mobileNav) return;
+    hamburger.addEventListener('click', function () {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+    });
+    document.addEventListener('click', function (e) {
+      if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
+        hamburger.classList.remove('open');
+        mobileNav.classList.remove('open');
+      }
+    });
+  });
 })();

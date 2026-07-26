@@ -16,6 +16,7 @@
     renderPhases();
     initStaggerIndex();
     // initModal();
+    initMobileNav();
     initCopyButton();
     initSmoothScroll();
     initFadeObserver();
