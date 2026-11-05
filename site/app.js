@@ -16,6 +16,7 @@
     renderPhases();
     initStaggerIndex();
     // initModal();
+    initTocNav();
     initMobileNav();
     initCopyButton();
     initSmoothScroll();
@@ -499,6 +500,46 @@
     var div = document.createElement('div');
     div.textContent = str == null ? '' : str;
     return div.innerHTML;
+  }
+
+  function slugify(text) {
+    return String(text == null ? '' : text).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  }
+
+  function phaseSlug(p, idx) {
+    if (p.url) {
+      var m = p.url.match(/phases\/([^/]+)/);
+      if (m) return m[1];
+    }
+    if (p.lessons && p.lessons[0] && p.lessons[0].url) {
+      var m2 = p.lessons[0].url.match(/phases\/([^/]+)/);
+      if (m2) return m2[1];
+    }
+    return String(p.id).padStart(2, '0') + '-' + slugify(p.name);
+  }
+
+  function lessonPathFromLesson(l, p, pIdx, lIdx) {
+    if (l.url) {
+      var mTree = l.url.match(/tree\/main\/(.+?)\/?$/);
+      if (mTree) return mTree[1];
+      var m = l.url.match(/(phases\/[^/]+\/[^/]+)\/?$/);
+      if (m) return m[1];
+    }
+    return 'phases/' + phaseSlug(p, pIdx) + '/' + String(lIdx + 1).padStart(2, '0') + '-' + slugify(l.name);
+  }
+
+  function initTocNav() {
+    document.addEventListener('click', function (e) {
+      var row = e.target.closest('.toc-row');
+      if (!row) return;
+      var idx = parseInt(row.getAttribute('data-phase'), 10);
+      if (isNaN(idx) || typeof PHASES === 'undefined') return;
+      var p = PHASES[idx];
+      if (!p || !p.lessons.length) return;
+      var path = lessonPathFromLesson(p.lessons[0], p, idx, 0);
+      e.preventDefault();
+      window.location.href = 'lesson.html?path=' + path;
+    });
   }
 
   function initTocSearch() {
