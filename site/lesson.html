@@ -1616,8 +1616,16 @@
     <main class="lesson-main">
       <div class="lesson-content" id="lessonContent">
         <div class="lesson-loading" id="lessonLoading">
-          <div class="spinner"></div>
-          <div class="lesson-loading-text">Loading lesson...</div>
+          <div class="skeleton-h1 skeleton"></div>
+          <div class="skeleton-p lg skeleton"></div>
+          <div class="skeleton-p md skeleton"></div>
+          <div class="skeleton-p sm skeleton"></div>
+          <div class="skeleton-code skeleton"></div>
+          <div class="skeleton-p md skeleton"></div>
+          <div class="skeleton-p sm skeleton"></div>
+          <div class="skeleton-text lg skeleton"></div>
+          <div class="skeleton-text md skeleton"></div>
+          <div class="skeleton-text sm skeleton"></div>
         </div>
       </div>
     </main>
@@ -1933,7 +1941,23 @@
         if (minutes < 1) minutes = 1;
 
         var rtHtml = '<div class="reading-time">~' + minutes + ' min read</div>';
-        html = html.replace(/(<h1[^>]*>.*?<\/h1>)/i, '$1' + rtHtml);
+        var extraHtml = rtHtml;
+
+        // Lesson progress bar (within current phase)
+        if (typeof flatLessons !== 'undefined' && currentPhaseIndex >= 0 && currentLessonIndex >= 0) {
+          var phaseLessons = flatLessons.filter(function (fl) { return fl.phaseIndex === currentPhaseIndex; });
+          var totalInPhase = phaseLessons.length;
+          var doneInPhase = phaseLessons.filter(function (fl) { return fl.status === 'complete'; }).length;
+          var pct = totalInPhase > 0 ? Math.round((doneInPhase / totalInPhase) * 100) : 0;
+          extraHtml += '<div class="lesson-progress">' + doneInPhase + ' / ' + totalInPhase + ' lessons in this phase</div><div class="lesson-progress-bar"><div class="lesson-progress-fill" style="width:' + pct + '%"></div></div>';
+        }
+
+        // Share lesson button (copy URL to clipboard)
+        if (lessonPath) {
+          extraHtml += '<div class="lesson-share" style="margin-top:16px;"><button class="btn-share" id="btnShareLesson" type="button" title="Copy lesson link">Copy lesson link</button></div>';
+        }
+
+        html = html.replace(/(<h1[^>]*>.*?<\/h1>)/i, '$1' + extraHtml);
 
         // Breadcrumbs
         var bcHtml = '';
@@ -3385,6 +3409,50 @@
             alert('Failed to load file content: ' + err.message);
           });
       }
+
+      // Share lesson button: copy current URL to clipboard
+      (function () {
+        var shareBtn = document.getElementById('btnShareLesson');
+        if (shareBtn && lessonPath) {
+          shareBtn.addEventListener('click', function () {
+            var url = window.location.href;
+            navigator.clipboard.writeText(url).then(function () {
+              shareBtn.textContent = 'Copied!';
+              setTimeout(function () { shareBtn.textContent = 'Copy lesson link'; }, 1500);
+            });
+          });
+        }
+      })();
+
+      // Keyboard shortcuts
+      (function () {
+        var hints = document.createElement('div');
+        hints.className = 'kbd-hint';
+        hints.innerHTML = '<span class="kbd">j</span> <span class="kbd">k</span> next/prev lesson &nbsp;·&nbsp; <span class="kbd">/</span> search catalog &nbsp;·&nbsp; <span class="kbd">?</span> show help';
+        var main = document.getElementById('lessonContent');
+        if (main) main.appendChild(hints);
+
+        document.addEventListener('keydown', function (e) {
+          // Only handle when not typing in an input
+          if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
+
+          if (e.key === 'j' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            var nextBtn = document.querySelector('.lesson-nav-btn.next');
+            if (nextBtn) window.location.href = nextBtn.href;
+          } else if (e.key === 'k' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            var prevBtn = document.querySelector('.lesson-nav-btn.prev');
+            if (prevBtn) window.location.href = prevBtn.href;
+          } else if (e.key === '/') {
+            e.preventDefault();
+            window.location.href = 'catalog.html';
+          } else if (e.key === '?') {
+            e.preventDefault();
+            alert('Keyboard shortcuts:\nj / ↓  Next lesson\nk / ↑  Previous lesson\n/  Open catalog\n?  Show this help');
+          }
+        });
+      })();
 
       // Font-size adjuster
       (function () {

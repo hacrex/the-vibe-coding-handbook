@@ -1747,3 +1747,90 @@ body.js-anim .toc-row.in-view {
   color: var(--bg);
   border-bottom: 1px solid var(--ink);
 }
+
+/* Skeleton loading states */
+.skeleton {
+  background: linear-gradient(90deg, var(--bg-surface) 25%, var(--rule-soft) 50%, var(--bg-surface) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  border-radius: 6px;
+}
+@keyframes skeleton-pulse {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.skeleton-text { height: 1em; }
+.skeleton-text.sm { width: 40%; }
+.skeleton-text.md { width: 65%; }
+.skeleton-text.lg { width: 100%; }
+.skeleton-h1 { height: 2.4rem; width: 60%; margin-bottom: 1rem; }
+.skeleton-h2 { height: 1.8rem; width: 45%; margin-bottom: 0.75rem; }
+.skeleton-p { height: 1rem; margin-bottom: 0.75rem; width: 90%; }
+.skeleton-p.sm { width: 60%; }
+.skeleton-code { height: 120px; width: 100%; margin-bottom: 1rem; }
+
+/* Lesson progress bar */
+.lesson-progress {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-top: 10px;
+}
+.lesson-progress-bar {
+  height: 4px;
+  background: var(--rule-soft);
+  margin-top: 6px;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.lesson-progress-fill {
+  height: 100%;
+  background: var(--blueprint);
+  transition: width 0.4s ease;
+  width: 0%;
+}
+
+/* Share button */
+.btn-share {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border: 1px solid var(--ink);
+  background: var(--bg);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  margin-left: 8px;
+}
+.btn-share:hover {
+  background: var(--ink);
+  color: var(--bg);
+  border-bottom: 1px solid var(--ink);
+}
+
+/* Keyboard shortcuts hint */
+.kbd-hint {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-mute);
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule-soft);
+}
+.kbd {
+  display: inline-block;
+  border: 1px solid var(--rule-soft);
+  border-radius: 4px;
+  padding: 1px 6px;
+  margin: 0 2px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--ink);
+  background: var(--bg-surface);
+}
