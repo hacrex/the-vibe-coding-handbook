@@ -1577,11 +1577,6 @@
           <svg class="star-icon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.896l-7.416 3.517 1.48-8.279L0 9.306l8.332-1.151z"/></svg>
           <span class="star-count" data-loading="true" aria-label="GitHub stars">…</span>
         </a>
-        <div class="font-controls" id="fontControls" style="display:none;">
-          <button class="btn-font" data-size="small" type="button" title="Smaller text">A−</button>
-          <button class="btn-font" data-size="medium" type="button" title="Normal text">A</button>
-          <button class="btn-font" data-size="large" type="button" title="Larger text">A+</button>
-        </div>
       </nav>
       <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" type="button">
         <span></span><span></span><span></span>
@@ -3629,24 +3624,6 @@
             e.preventDefault();
             alert('Keyboard shortcuts:\nj / ↓  Next lesson\nk / ↑  Previous lesson\n/  Open catalog\n?  Show this help');
           }
-        });
-      })();
-
-      // Font-size adjuster
-      (function () {
-        var size = localStorage.getItem('aifs:font-size') || 'medium';
-        document.body.classList.add('font-size-' + size);
-        var fc = document.getElementById('fontControls');
-        if (fc) fc.style.display = 'flex';
-        document.querySelectorAll('.btn-font').forEach(function (b) {
-          if (b.getAttribute('data-size') === size) b.style.opacity = '0.6';
-          b.addEventListener('click', function () {
-            var s = b.getAttribute('data-size');
-            document.body.className = document.body.className.replace(/font-size-\w+/g, '');
-            document.body.classList.add('font-size-' + s);
-            localStorage.setItem('aifs:font-size', s);
-            document.querySelectorAll('.btn-font').forEach(function (x) { x.style.opacity = x.getAttribute('data-size') === s ? '0.6' : '1'; });
-          });
         });
       })();
     })();

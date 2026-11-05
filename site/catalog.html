@@ -7,7 +7,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23faf9f7'/><rect x='2' y='2' width='28' height='28' fill='none' stroke='%23d96c4f' stroke-width='1.2'/><text x='6' y='22' font-size='14' font-family='monospace' fill='%23d96c4f'>VC</text></svg>">
   <meta name="description" content="Browse all lessons in the Vibe Coding Handbook. Search, filter, and sort 46 sections covering AI-assisted development from beginner to advanced.">
   <meta property="og:title" content="Lesson Catalog — The Vibe Coding Handbook">
-  <meta property="og:description" content="Browse and search all lessons across 46 sections. Filter by phase, type, and status.">
+  <meta property="og:description" content="Browse and search all lessons across 46 sections. Filter by phase, type, status, and difficulty.">
   <meta property="og:image" content="https://vibingcode.dev/og-image.png?v=2">
   <meta property="og:url" content="https://vibingcode.dev/catalog.html">
   <meta property="og:type" content="website">
@@ -248,12 +248,6 @@
       <div class="catalog-header">
         <h1>Lesson Catalog</h1>
         <p>Every lesson across all 46 phases. Search, filter, sort.</p>
-        <button class="btn-random" id="btnRandomLesson" type="button" title="Random lesson">Random lesson</button>
-        <div class="font-controls" id="fontControls" style="display:none;">
-          <button class="btn-font" data-size="small" type="button" title="Smaller text">A−</button>
-          <button class="btn-font" data-size="medium" type="button" title="Normal text">A</button>
-          <button class="btn-font" data-size="large" type="button" title="Larger text">A+</button>
-        </div>
       </div>
       <div class="catalog-controls">
         <input type="text" class="catalog-search" id="catalogSearch" placeholder="Search lessons...">
@@ -295,7 +289,7 @@
         <a href="index.html">Home</a>
         <a href="https://github.com/hacrex/the-vibe-coding-handbook" rel="noopener">GitHub</a>
         <a href="glossary.html">Glossary</a>
-              <a href="https://github.com/hacrex/the-vibe-coding-handbook/issues/new/choose" rel="noopener">Report / Suggest</a>
+        <a href="https://github.com/hacrex/the-vibe-coding-handbook/issues/new/choose" rel="noopener">Report / Suggest</a>
       </div>
     </div>
   </footer>
@@ -451,7 +445,7 @@
           countEl.textContent = rows.length + ' of ' + allRows.length + ' lessons';
 
           if (rows.length === 0) {
-            bodyEl.innerHTML = '<tr><td colspan="5" class="catalog-empty">No lessons match your filters.</td></tr>';
+            bodyEl.innerHTML = '<tr><td colspan="7" class="catalog-empty">No lessons match your filters.</td></tr>';
             return;
           }
 
@@ -507,46 +501,7 @@
         render();
       });
     })();
-
-    (function () {
-      var btn = document.getElementById('btnRandomLesson');
-      if (btn && typeof PHASES !== 'undefined') {
-        btn.addEventListener('click', function () {
-          var flat = [];
-          for (var i = 0; i < PHASES.length; i++) {
-            var p = PHASES[i];
-            for (var j = 0; j < p.lessons.length; j++) {
-              var l = p.lessons[j];
-              if (l.url) {
-                var mTree = l.url.match(/tree\/main\/(.+?)\/?$/);
-                if (mTree) flat.push(mTree[1]);
-              }
-            }
-          }
-          if (flat.length) {
-            var path = flat[Math.floor(Math.random() * flat.length)];
-            window.location.href = 'lesson.html?path=' + path;
-          }
-        });
-      }
-    })();
-
-    (function () {
-      var size = localStorage.getItem('aifs:font-size') || 'medium';
-      document.body.classList.add('font-size-' + size);
-      var fc = document.getElementById('fontControls');
-      if (fc) fc.style.display = 'flex';
-      document.querySelectorAll('.btn-font').forEach(function (b) {
-        if (b.getAttribute('data-size') === size) b.style.opacity = '0.6';
-        b.addEventListener('click', function () {
-          var s = b.getAttribute('data-size');
-          document.body.className = document.body.className.replace(/font-size-\w+/g, '');
-          document.body.classList.add('font-size-' + s);
-          localStorage.setItem('aifs:font-size', s);
-          document.querySelectorAll('.btn-font').forEach(function (x) { x.style.opacity = x.getAttribute('data-size') === s ? '0.6' : '1'; });
-        });
-      })();
   </script>
-<script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
+  <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
 </body>
 </html>
