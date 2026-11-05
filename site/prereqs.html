@@ -722,6 +722,18 @@
       return div.innerHTML;
     }
 
+    /* Strip markdown formatting (bold, italic, code, links) from description text */
+    function stripMarkdown(str) {
+      if (!str) return str;
+      return str
+        .replace(/\*\*/g, '')
+        .replace(/\*/g, '')
+        .replace(/__/g, '')
+        .replace(/_/g, '')
+        .replace(/`/g, '')
+        .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1');
+    }
+
     /** Split a phase name into 1 or 2 lines for SVG text */
     function splitName(name) {
       if (name.length <= 20) return [name];
@@ -1032,7 +1044,7 @@
           '<span class="detail-status ' + phase.status + '">' + phase.status.replace('-', ' ') + '</span>' +
         '</div>' +
         '<div class="detail-title">' + escapeHtml(phase.name) + '</div>' +
-        '<div class="detail-desc">' + escapeHtml(phase.desc) + '</div>' +
+        '<div class="detail-desc">' + escapeHtml(stripMarkdown(phase.desc)) + '</div>' +
         '<div class="detail-stats">' +
           '<strong>' + stats.done + '</strong> of <strong>' + stats.total + '</strong> lessons complete' +
           ' &nbsp;·&nbsp; <strong>' + ancestorCount + '</strong> prerequisite phases' +
