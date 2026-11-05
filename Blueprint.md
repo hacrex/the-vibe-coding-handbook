@@ -381,7 +381,7 @@ Create separate markdown files.
 * Codex
 * DeepSeek
 * Cursor
-* Windsurf
+* Devin Desktop (formerly Windsurf)
 * Continue
 * Aider
 * OpenCode
@@ -420,12 +420,12 @@ Create separate markdown files.
 * Neovim
 * JetBrains
 * Cursor
-* Windsurf
+* Devin Desktop (formerly Windsurf)
 
 ## AI Native IDEs
 
 * Cursor
-* Windsurf
+* Devin Desktop (formerly Windsurf)
 * Kiro
 * Dyad
 * Antigravity

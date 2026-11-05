@@ -2,6 +2,8 @@
 
 A comprehensive guide to AI models for software development, including frontier models, open-source models, coding-specific models, and how to choose the right model for each task.
 
+> **Last updated: November 2026** — reflects the current model lineup (Claude 5.5/Fable 5.1, GPT-6, Gemini 4, Kimi K3, GLM-5.3, DeepSeek V4), current pricing, and November 2026 benchmarks.
+
 ---
 
 ## Table of Contents
@@ -33,7 +35,7 @@ Large-scale proprietary models from major AI labs with state-of-the-art capabili
 - **Grok series** (xAI)
 
 These models offer:
-- Largest context windows (100K-2M+ tokens)
+- Largest context windows (1M tokens is now standard on flagships)
 - Best reasoning capabilities
 - Strongest general knowledge
 - Highest cost per token
@@ -43,11 +45,12 @@ These models offer:
 
 Publicly available models that can be run locally or self-hosted:
 
-- **Llama series** (Meta)
+- **Kimi series** (Moonshot AI)
+- **GLM series** (Z.ai)
+- **DeepSeek series** (DeepSeek)
 - **Qwen series** (Alibaba)
-- **DeepSeek series** (DeepSeek AI)
 - **Mistral series** (Mistral AI)
-- **Phi series** (Microsoft)
+- **Llama series** (Meta)
 - **Gemma series** (Google)
 
 Benefits:
@@ -59,14 +62,13 @@ Benefits:
 
 ### 3. Coding-Specific Models
 
-Models specifically trained or fine-tuned for code generation and understanding:
+Models with a strong focus on code generation and understanding (note: in 2026, general-purpose flagships top the coding leaderboards — see [Coding-Specific Models](#coding-specific-models) below):
 
-- **DeepSeek Coder**
-- **Qwen Coder**
+- **DeepSeek V4.1 Flash / V4 Pro**
+- **Qwen3.8 / Qwen3.8 Max** (Alibaba)
 - **Codestral** (Mistral)
-- **StarCoder**
-- **Code Llama**
-- **WizardCoder**
+- **Kimi K3** (Moonshot AI)
+- **GLM-5.3** (Z.ai)
 
 Specialized for:
 - Code completion
@@ -81,27 +83,29 @@ Specialized for:
 
 ### GPT Series (OpenAI)
 
-#### GPT-4o / GPT-4 Turbo
+#### GPT-6 Astra / GPT-6.1 Sol / GPT-6.1 Terra / GPT-6 Luna
 
-**Context Window:** 128K tokens  
-**Best For:** Complex reasoning, multi-step tasks, general programming
+**Context Window:** ~1M tokens  
+**Best For:** Complex reasoning, multi-file agentic coding, general programming
+
+**The 2026 GPT-6 lineup:**
+- **GPT-6 Astra** — $10/1M input, $50/1M output: flagship for complex reasoning and coding
+- **GPT-6.1 Sol** — ~$2-4/$10-20: near-Astra performance at substantially lower cost
+- **GPT-6.1 Terra** — $2/$10: best value for everyday coding
+- **GPT-6 Luna** — $0.10/$0.50: fast, high-volume tasks
 
 **Strengths:**
 - Excellent code generation across all languages
-- Strong debugging capabilities
+- Strong multi-step reasoning for large changesets
 - Good at explaining complex concepts
 - Wide tool integration ecosystem
 - Reliable API with good uptime
 
 **Weaknesses:**
-- Expensive for large-scale usage
+- Astra pricing adds up quickly at scale
 - Rate limits on free tier
 - Cannot run locally
 - Occasional knowledge cutoff issues
-
-**Pricing:**
-- GPT-4o: ~$5/1M input tokens, ~$15/1M output tokens
-- GPT-4 Turbo: ~$10/1M input tokens, ~$30/1M output tokens
 
 **Best Use Cases:**
 - Architecture design discussions
@@ -109,44 +113,34 @@ Specialized for:
 - Code review and optimization
 - Learning new technologies
 
-#### o1 / o1-mini (Reasoning Models)
-
-**Context Window:** 128K tokens  
-**Best For:** Complex problem-solving, mathematical reasoning, system design
-
-**Strengths:**
-- Superior reasoning capabilities
-- Better at multi-step planning
-- Reduced hallucinations
-- Excellent for system design interviews
-
-**Weaknesses:**
-- Slower response times (chain-of-thought)
-- Higher cost
-- Overkill for simple tasks
+**A Note on "Reasoning Models":**
+Extended thinking is now built into the GPT-6 and Claude families — there is no separate reasoning-model tier to pick. You choose a capability tier (flagship, everyday, or fast/value) and the model reasons as deeply as the task requires.
 
 ### Claude Series (Anthropic)
 
-#### Claude 3.5 Sonnet / Claude 3 Opus
+#### Claude Opus 5.5 / Claude Sonnet 5.5 / Claude Fable 5.1 / Claude Haiku 5.5
 
-**Context Window:** 200K tokens  
-**Best For:** Long-context understanding, code refactoring, documentation
+**Context Window:** 1M tokens  
+**Best For:** Long-running agentic coding, codebase-wide refactoring, documentation
+
+**The 2026 Claude lineup:**
+- **Claude Opus 5.5** — $4/1M input, $20/1M output: flagship, best for long-running agentic coding
+- **Claude Sonnet 5.5** — $2/$10: everyday coding workhorse
+- **Claude Fable 5.1** — $10/$50: hardest reasoning and long-horizon work
+- **Claude Haiku 5.5** — $0.10/$0.50: high-volume, latency-sensitive tasks
 
 **Strengths:**
-- Exceptional code quality
-- Large context window for full codebase understanding
+- #1 on the BenchLeader coding index (Opus 5.5 at 80.9, November 2026)
+- Best Terminal-bench 4.0 results (Sonnet 5.5 at 70.6%)
+- 1M context for full repository understanding
 - Excellent at following instructions
 - Strong security awareness
 - Great for legacy code modernization
 
 **Weaknesses:**
-- Slightly slower than GPT-4
-- Limited tool integrations compared to OpenAI
-- Higher cost for Opus model
-
-**Pricing:**
-- Claude 3.5 Sonnet: ~$3/1M input tokens, ~$15/1M output tokens
-- Claude 3 Opus: ~$15/1M input tokens, ~$75/1M output tokens
+- Opus/Fable pricing is premium
+- Slower than Haiku-tier models for simple tasks
+- Anthropic-only ecosystem (no open weights)
 
 **Best Use Cases:**
 - Full repository analysis
@@ -156,113 +150,110 @@ Specialized for:
 
 ### Gemini Series (Google)
 
-#### Gemini 1.5 Pro / Gemini Ultra
+#### Gemini 4 Argon / Gemini 4 Carbon
 
-**Context Window:** Up to 2M tokens (experimental)  
-**Best For:** Massive context processing, multimodal tasks
+**Context Window:** 1M tokens  
+**Best For:** Real-world software engineering, massive context processing, multimodal tasks
+
+**The 2026 Gemini lineup:**
+- **Gemini 4 Argon** — ~$2/1M input, ~$10/1M output (introductory): flagship built for real-world software engineering
+- **Gemini 4 Carbon** — $8/$8: high coding score (75.2 on BenchLeader)
+- **Gemini Flash family** — ~$0.75/$3.75: fast and cheap
 
 **Strengths:**
-- Industry-leading context window
-- Native multimodal understanding
-- Good integration with Google Cloud
+- Best DeepSWE v1.1 result of any model (Argon 77.9%)
+- 1M context, native multimodal understanding
+- Good integration with Google Cloud and Antigravity
 - Competitive pricing
 
 **Weaknesses:**
-- Inconsistent code quality vs Claude/GPT
+- Argon pricing is introductory and may rise
 - API availability varies by region
-- Less mature ecosystem
-
-**Pricing:**
-- Gemini 1.5 Pro: ~$3.50/1M input tokens, ~$10.50/1M output tokens
+- Ecosystem less mature than Anthropic/OpenAI for coding agents
 
 ### Grok Series (xAI)
 
-#### Grok-2 / Grok-Beta
-
-**Context Window:** 128K tokens  
 **Best For:** Real-time information, unconventional problem-solving
 
 **Strengths:**
 - Access to real-time X/Twitter data
 - Less restricted responses
-- Growing capabilities
+- Competitive coding performance in recent releases
 
 **Weaknesses:**
-- Newer model with less proven track record
-- Limited integrations
-- Variable code quality
+- Coding is not the primary focus
+- Smaller coding ecosystem than Claude/GPT/Gemini
+- Variable code quality on large refactors
 
 ---
 
 ## Open Source Models
 
-### Llama Series (Meta)
+### Kimi Series (Moonshot AI)
 
-#### Llama 3.1 / Llama 3.2
+#### Kimi K3
 
-**Parameters:** 8B, 70B, 405B variants  
-**Context Window:** 128K tokens  
-**Best For:** General purpose, local deployment, cost-effective solutions
-
-**Strengths:**
-- Excellent performance for open model
-- Multiple size options
-- Strong community support
-- Runs on consumer hardware (smaller variants)
-- Commercial use allowed
-
-**Hardware Requirements:**
-- 8B: 16GB RAM (quantized), 24GB VRAM (full)
-- 70B: 48GB VRAM (quantized), 140GB VRAM (full)
-- 405B: Multi-GPU setup required
-
-**Best Variants for Coding:**
-- Llama 3.1 70B: Best balance of speed and quality
-- Llama 3.2 3B: Ultra-fast for simple completions
-
-### Qwen Series (Alibaba)
-
-#### Qwen 2.5 / Qwen 2.5 Coder
-
-**Parameters:** 0.5B to 72B variants  
-**Context Window:** 128K tokens  
-**Best For:** Coding tasks, multilingual support
+**Context Window:** 1M+ tokens  
+**Pricing:** $3/1M input, $15/1M output  
+**Best For:** Long-context agentic coding on an open-weight model
 
 **Strengths:**
-- Excellent coding capabilities
-- Strong multilingual support
-- Efficient inference
-- Good quantization support
+- 1M+ context window handles entire repositories
+- Strong agentic/tool-use performance
+- Open weights (self-hostable, API available)
+- Competitive with proprietary mid-tier models
 
-**Best Variants:**
-- Qwen 2.5 Coder 32B: Best coding performance
-- Qwen 2.5 7B: Fast general assistant
+### GLM Series (Z.ai)
+
+#### GLM-5.3
+
+**Context Window:** 1M tokens  
+**Pricing:** $1.40/1M input, $4.40/1M output  
+**Best For:** High-quality coding at a fraction of flagship cost
+
+**Strengths:**
+- Excellent coding performance for the price
+- 1M context
+- Open weights with commercial-friendly licensing
+- Strong community tooling and quantization support
 
 ### DeepSeek Series
 
-#### DeepSeek V2.5 / DeepSeek Coder V2
+#### DeepSeek V4 Pro / DeepSeek V4.1 Flash
 
-**Parameters:** 16B to 236B (MoE)  
-**Context Window:** 128K tokens  
-**Best For:** Coding, mathematics, reasoning
+**Context Window:** 1M tokens  
+**Pricing:** V4 Pro $0.66/$1.98, V4.1 Flash $0.15/$0.60 per 1M tokens  
+**Best For:** Cost-sensitive, high-volume coding
 
 **Strengths:**
-- State-of-the-art coding performance
-- Mixture of Experts architecture (efficient)
-- Free API tier available
-- Excellent math capabilities
+- Mixture of Experts architecture (efficient inference)
+- Near-zero cost for individual developers
+- Excellent math and coding capabilities
+- Open weights plus a cheap hosted API
 
 **Performance:**
-- Matches GPT-4 on many coding benchmarks
+- Competitive with mid-tier proprietary models on coding benchmarks
 - Faster inference due to MoE architecture
-- Cost-effective for production use
+- Best value tier for production use
+
+### Qwen Series (Alibaba)
+
+#### Qwen3.8 / Qwen3.8 Max
+
+**Context Window:** 1M tokens  
+**Best For:** Coding tasks, multilingual support, local deployment
+
+**Strengths:**
+- Excellent coding capabilities across the Qwen3.8 family
+- Strong multilingual support
+- Multiple sizes (small variants run on consumer GPUs)
+- Efficient inference and good quantization support
 
 ### Mistral Series (Mistral AI)
 
-#### Mistral Large / Mixtral 8x22B
+#### Mistral Large 4
 
-**Parameters:** Up to 141B (MoE effective)  
-**Context Window:** 32K-128K tokens  
+**Context Window:** 1M-class  
 **Best For:** European deployments, efficient inference
 
 **Strengths:**
@@ -271,31 +262,19 @@ Specialized for:
 - Commercial-friendly licensing
 - Good coding capabilities
 
-### Phi Series (Microsoft)
+### Llama Series (Meta)
 
-#### Phi-3 / Phi-3.5 Mini & Small
-
-**Parameters:** 3.8B to 14B  
-**Context Window:** 128K tokens  
-**Best For:** Edge devices, low-resource environments
+**Best For:** General purpose, local deployment, community fine-tunes
 
 **Strengths:**
-- Remarkable performance for size
-- Runs on mobile devices
-- Low latency
-- Minimal hardware requirements
-
-**Hardware Requirements:**
-- Phi-3 Mini (3.8B): 8GB RAM (quantized)
-- Perfect for offline mobile development
+- Multiple size options across generations
+- Huge community ecosystem and fine-tunes
+- Runs on consumer hardware (smaller variants)
+- Commercial use allowed
 
 ### Gemma Series (Google)
 
-#### Gemma 2 / Gemma 2B
-
-**Parameters:** 2B, 9B, 27B  
-**Context Window:** 8K tokens  
-**Best For:** Lightweight applications, research
+**Best For:** Lightweight applications, on-device experiments
 
 **Strengths:**
 - Google's open model offering
@@ -307,41 +286,38 @@ Specialized for:
 
 ## Coding-Specific Models
 
-### DeepSeek Coder
+### The 2026 Reality: Flagships Lead
 
-**Versions:** 1.3B, 6.7B, 33B, V2 (MoE)  
-**Training Data:** 2T tokens of code
+Dedicated code models no longer top the leaderboards — general-purpose flagships do. Claude Opus 5.5 (80.9) and Gemini 4 Carbon (75.2) top the BenchLeader coding index, and everyday models like Claude Sonnet 5.5 (72.7) outperform yesterday's code specialists. Pick a model by capability tier, not by the "coder" label.
+
+What remains genuinely specialized:
+
+### DeepSeek V4.1 Flash / V4 Pro
+
+**Context Window:** 1M tokens  
+**Pricing:** $0.15/$0.60 (Flash), $0.66/$1.98 (Pro) per 1M tokens
 
 **Capabilities:**
-- 80+ programming languages
-- Code completion
-- Bug fixing
-- Code explanation
-- Test generation
+- High-throughput code generation
+- Bug fixing and refactoring
+- Code explanation and test generation
+- 1M context for large files and repos
 
 **Performance:**
-- Outperforms CodeLlama on HumanEval
-- Competitive with GPT-3.5 for coding
-- Excellent value for self-hosting
+- Near-frontier coding at the lowest price tier
+- MoE architecture keeps inference fast and cheap
+- Excellent value for self-hosting or API use
 
-### Qwen Coder
-
-**Versions:** 1.5B, 7B, 32B  
-**Specialties:**
-- Full-stack development
-- API design
-- Database queries
-- DevOps scripts
+### Qwen3.8 / Qwen3.8 Max (Alibaba)
 
 **Strengths:**
-- Strong TypeScript/JavaScript support
-- Excellent Python capabilities
-- Good at explaining code
+- Full-stack development and API design
+- Database queries and DevOps scripts
+- Strong TypeScript/JavaScript and Python support
+- Multiple sizes, from local to Max-tier API
 
 ### Codestral (Mistral)
 
-**Parameters:** 22B  
-**Context Window:** 32K tokens  
 **Specialties:**
 - Code completion
 - Fill-in-the-middle (FIM)
@@ -352,26 +328,13 @@ Specialized for:
 - Excellent IDE integration
 - Commercial use allowed
 
-### Code Llama
-
-**Versions:** 7B, 13B, 34B, 70B  
-**Variants:** Base, Instruct, Python
+### Kimi K3 & GLM-5.3
 
 **Strengths:**
-- Meta's official code model
-- Strong Python support
-- Good community fine-tunes
-- Well-documented
-
-### StarCoder2
-
-**Parameters:** 3B, 7B, 15B  
-**Training:** The Stack v2 dataset
-
-**Strengths:**
-- Trained on permissively-licensed code
-- Good for commercial use
-- Strong multilingual code support
+- Open-weight models strong enough for agentic coding workflows
+- 1M context windows
+- Cheap to self-host or call via API
+- Good alternatives when you need open weights for compliance
 
 ---
 
@@ -386,11 +349,11 @@ The maximum number of tokens a model can process in a single request.
 - Full file or repository understanding
 - Better consistency across long conversations
 
-**Typical sizes:**
-- Small models: 4K-8K tokens
-- Medium models: 32K-64K tokens
-- Large models: 128K-200K tokens
-- Experimental: 1M-2M tokens
+**Typical sizes (2026):**
+- Small/fast models: 128K-256K tokens
+- Mid-tier models: 256K-512K tokens
+- Flagship models: 1M tokens (now standard)
+- Long-context tiers: 1M+ tokens (Kimi K3, all Claude/GPT/Gemini flagships)
 
 **Token estimation:**
 - 1 token ≈ 4 characters English
@@ -408,7 +371,7 @@ The maximum number of tokens a model can process in a single request.
 - Chain-of-thought processing
 - Better for complex problems
 - Slower but more accurate
-- Examples: o1, Claude with extended thinking
+- Examples: Claude Fable 5.1, Claude Opus 5.5, GPT-6 Astra (extended thinking)
 
 ### Inference Methods
 
@@ -453,6 +416,7 @@ Common in AI code generation:
 - Run tests immediately
 - Use AI for scaffolding, not final code
 - Cross-reference with documentation
+- Sonar's 2026 survey (1,149 professionals) found 96% don't fully trust AI-generated code — yet only 48% always check it before committing. Be in the other 48%.
 
 ### Tool Usage
 
@@ -489,66 +453,74 @@ Some models can process:
 
 ## How to Choose Models
 
+### The 2026 Routing Rule
+
+Vendors now ship the same three tiers, so the choice pattern is simple:
+
+- **Complex multi-file / agentic work** → flagship tier (Claude Opus 5.5, Claude Fable 5.1, GPT-6 Astra, Gemini 4 Argon)
+- **Everyday coding** → mid tier (Claude Sonnet 5.5, GPT-6.1 Sol, Gemini 4 Flash)
+- **Long-context, volume, or cost-sensitive work** → value tier (Claude Haiku 5.5, GPT-6.1 Terra, GPT-6 Luna, DeepSeek V4.1 Flash, GLM-5.3)
+
 ### For Frontend Development
 
-**Recommended:** Claude 3.5 Sonnet, GPT-4o, Qwen Coder 32B
+**Recommended:** Claude Sonnet 5.5, GPT-6.1 Terra, Gemini 4 Argon
 
 **Tasks:**
 - Component generation → Any coding model
 - Tailwind CSS → Claude (excellent CSS understanding)
-- React patterns → GPT-4o or Claude
-- Animations → GPT-4o (creative solutions)
+- React patterns → GPT-6.1 Sol or Claude Sonnet 5.5
+- Animations → GPT-6.1 Terra (creative solutions)
 - Accessibility → Claude (strong guidelines knowledge)
 
-**Local Alternative:** Qwen Coder 32B, DeepSeek Coder V2
+**Local Alternative:** GLM-5.3, Qwen3.8 (open weights)
 
 ### For Backend Development
 
-**Recommended:** Claude 3.5 Sonnet, DeepSeek V2.5, GPT-4o
+**Recommended:** Claude Sonnet 5.5, DeepSeek V4 Pro, GPT-6.1 Terra
 
 **Tasks:**
 - API design → Claude (clean architecture)
-- Database queries → GPT-4o or DeepSeek
+- Database queries → GPT-6.1 Terra or DeepSeek
 - Authentication → Claude (security-focused)
-- Microservices → GPT-4o (system design)
-- Performance optimization → DeepSeek V2.5
+- Microservices → GPT-6 Astra (system design)
+- Performance optimization → DeepSeek V4 Pro
 
-**Local Alternative:** DeepSeek Coder V2, Code Llama 70B
+**Local Alternative:** DeepSeek V4 Pro, GLM-5.3
 
 ### For DevOps & Infrastructure
 
-**Recommended:** GPT-4o, Claude 3.5 Sonnet, Mistral Large
+**Recommended:** GPT-6.1 Sol, Claude Sonnet 5.5, Mistral Large 4
 
 **Tasks:**
 - Docker files → Any coding model
-- Kubernetes manifests → GPT-4o (complex YAML)
+- Kubernetes manifests → GPT-6.1 Sol (complex YAML)
 - Terraform → Claude (structured configs)
-- CI/CD pipelines → GPT-4o
-- Monitoring setup → Claude
+- CI/CD pipelines → GPT-6.1 Terra
+- Monitoring setup → Claude Sonnet 5.5
 
-**Local Alternative:** Qwen 2.5 72B, Mixtral 8x22B
+**Local Alternative:** GLM-5.3, Qwen3.8
 
 ### For Security Audits
 
-**Recommended:** Claude 3 Opus, GPT-4o
+**Recommended:** Claude Opus 5.5, GPT-6 Astra
 
 **Tasks:**
-- Vulnerability scanning → Claude (thorough analysis)
-- Penetration testing plans → GPT-4o
+- Vulnerability scanning → Claude Opus 5.5 (thorough analysis)
+- Penetration testing plans → GPT-6 Astra
 - Security best practices → Claude
-- Compliance checking → GPT-4o
+- Compliance checking → GPT-6.1 Sol
 
 **Note:** Always combine with automated security tools
 
 ### For Learning & Education
 
-**Recommended:** GPT-4o, Claude 3.5 Sonnet, Phi-3
+**Recommended:** GPT-6.1 Terra, Claude Sonnet 5.5, Claude Haiku 5.5
 
 **Tasks:**
-- Concept explanations → GPT-4o (clear teaching)
+- Concept explanations → GPT-6.1 Terra (clear teaching)
 - Code walkthroughs → Claude (detailed)
 - Practice problems → Any model
-- Quick questions → Phi-3 (fast, cheap)
+- Quick questions → Claude Haiku 5.5 / GPT-6 Luna (fast, cheap)
 
 ### For Production Systems
 
@@ -558,19 +530,20 @@ Some models can process:
 - Good error handling
 - SLA guarantees
 
-**Recommended:** GPT-4o, Claude 3.5 Sonnet, DeepSeek (cost-effective)
+**Recommended:** GPT-6.1 Sol, Claude Sonnet 5.5, DeepSeek V4.1 Flash (cost-effective)
 
 ### For Privacy-Sensitive Projects
 
 **Options:**
 1. Local models (Ollama, LM Studio)
-2. Self-hosted on private infrastructure
+2. Self-hosted open-weight models on private infrastructure
 3. Enterprise agreements with data protection
 
-**Recommended Local:**
-- Llama 3.1 70B (general)
-- DeepSeek Coder V2 (coding)
-- Qwen 2.5 Coder 32B (balanced)
+**Recommended Local (open weights):**
+- GLM-5.3 (best quality/size balance)
+- DeepSeek V4.1 Flash (fast, lightweight)
+- Qwen3.8 (multiple sizes, multilingual)
+- Kimi K3 (long context, if hardware allows)
 
 ---
 
@@ -580,61 +553,83 @@ Some models can process:
 
 | Model | Coding Quality | Reasoning | Speed | Context | Cost | Local |
 |-------|---------------|-----------|-------|---------|------|-------|
-| GPT-4o | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 128K | $$$ | ❌ |
-| Claude 3.5 Sonnet | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | 200K | $$ | ❌ |
-| Claude 3 Opus | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ | 200K | $$$$ | ❌ |
-| Gemini 1.5 Pro | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | 2M | $$ | ❌ |
-| DeepSeek V2.5 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 128K | $ | ✅ |
-| Llama 3.1 70B | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | 128K | Free* | ✅ |
-| Qwen 2.5 Coder 32B | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 128K | Free* | ✅ |
-| Codestral 22B | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ | 32K | Free* | ✅ |
-| Mistral Large | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 128K | $$ | ❌ |
-| Phi-3.5 Mini | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 128K | Free* | ✅ |
+| Claude Opus 5.5 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | 1M | $$ | ❌ |
+| Claude Sonnet 5.5 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 1M | $ | ❌ |
+| Claude Fable 5.1 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ | 1M | $$$ | ❌ |
+| Claude Haiku 5.5 | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 1M | $ | ❌ |
+| GPT-6 Astra | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | 1M | $$$ | ❌ |
+| GPT-6.1 Sol | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 1M | $$ | ❌ |
+| GPT-6.1 Terra | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 1M | $ | ❌ |
+| GPT-6 Luna | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 1M | $ | ❌ |
+| Gemini 4 Argon | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 1M | $ | ❌ |
+| Gemini 4 Carbon | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 1M | $$ | ❌ |
+| Kimi K3 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 1M+ | $$ | ✅ |
+| GLM-5.3 | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 1M | $ | ✅ |
+| DeepSeek V4 Pro | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 1M | $ | ✅ |
+| DeepSeek V4.1 Flash | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 1M | $ | ✅ |
+| Qwen3.8 Max | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 1M | $ | ✅ |
+| Mistral Large 4 | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 1M-class | $$ | ✅ |
 
-*Free to run locally; hardware costs apply
+*Local = open weights available for self-hosting (hardware costs apply)*
 
 ### Coding Benchmark Scores
 
-| Model | HumanEval | MBPP | LiveCodeBench | SWE-bench |
-|-------|-----------|------|---------------|-----------|
-| GPT-4o | 92% | 89% | 45% | 35% |
-| Claude 3.5 Sonnet | 92% | 91% | 48% | 40% |
-| DeepSeek V2.5 | 90% | 88% | 42% | 32% |
-| Llama 3.1 70B | 82% | 80% | 30% | 20% |
-| Qwen 2.5 Coder 32B | 88% | 85% | 38% | 28% |
-| Code Llama 70B | 80% | 78% | 28% | 18% |
-| Codestral 22B | 85% | 82% | 35% | 25% |
+**BenchLeader Coding Index (November 5, 2026):**
 
-*Approximate scores; benchmarks evolve rapidly
+| Rank | Model | Score |
+|------|-------|-------|
+| #1 | Claude Opus 5.5 | 80.9 |
+| #2 | Gemini 4 Carbon | 75.2 |
+| #3 | Claude Sonnet 5.5 | 72.7 |
+| #4 | GPT-6.1 Sol | 72.1 |
+
+**Terminal-bench 4.0 (agentic terminal coding):**
+
+| Model | Score |
+|-------|-------|
+| Claude Sonnet 5.5 | 70.6% |
+| Claude Opus 5.5 | 66.4% |
+| GPT-6 Astra | 57.9% |
+
+**DeepSWE v1.1 (real-world software engineering):**
+
+| Model | Score |
+|-------|-------|
+| Gemini 4 Argon | 77.9% |
+| Claude Opus 5.5 | 74.2% |
+
+*Benchmarks evolve rapidly — re-check leaderboards before committing to a model*
 
 ### Cost Comparison (per 1M tokens)
 
-| Model | Input | Output | Monthly 10M tokens |
+| Model | Input | Output | Monthly 10M tokens* |
 |-------|-------|--------|-------------------|
-| GPT-4o | $5 | $15 | $100 |
-| Claude 3.5 Sonnet | $3 | $15 | $90 |
-| Claude 3 Opus | $15 | $75 | $450 |
-| Gemini 1.5 Pro | $3.50 | $10.50 | $70 |
-| DeepSeek V2.5 | $0.14 | $0.28 | $2 |
-| Grok-2 | $5 | $15 | $100 |
-| Mistral Large | $4 | $12 | $80 |
+| Claude Opus 5.5 | $4 | $20 | $120 |
+| Claude Sonnet 5.5 | $2 | $10 | $60 |
+| Claude Fable 5.1 | $10 | $50 | $300 |
+| Claude Haiku 5.5 | $0.10 | $0.50 | $3 |
+| GPT-6 Astra | $10 | $50 | $300 |
+| GPT-6.1 Sol | ~$2-4 | ~$10-20 | ~$60-120 |
+| GPT-6.1 Terra | $2 | $10 | $60 |
+| GPT-6 Luna | $0.10 | $0.50 | $3 |
+| Gemini 4 Argon | ~$2 | ~$10 | ~$60 |
+| Gemini 4 Carbon | $8 | $8 | $80 |
+| Gemini Flash | ~$0.75 | ~$3.75 | ~$23 |
+| Kimi K3 | $3 | $15 | $90 |
+| GLM-5.3 | $1.40 | $4.40 | $29 |
+| DeepSeek V4 Pro | $0.66 | $1.98 | $13 |
+| DeepSeek V4.1 Flash | $0.15 | $0.60 | $4 |
 
-*Local models: ~$0.02-0.10 per 1M tokens (electricity only)
+*Assumes a 50/50 input/output token mix; local models: ~$0.02-0.10 per 1M tokens (electricity only)
 
 ### Hardware Requirements for Local Models
 
-| Model | VRAM (4-bit) | VRAM (8-bit) | RAM (CPU) | Min GPU |
-|-------|-------------|-------------|-----------|---------|
-| Phi-3 Mini | 3GB | 5GB | 8GB | None |
-| Llama 3.2 3B | 3GB | 5GB | 8GB | None |
-| Qwen 2.5 7B | 6GB | 10GB | 16GB | GTX 1660 |
-| DeepSeek Coder 6.7B | 6GB | 10GB | 16GB | GTX 1660 |
-| Mistral 7B | 6GB | 10GB | 16GB | GTX 1660 |
-| Llama 3.1 8B | 6GB | 10GB | 16GB | RTX 3060 |
-| Codestral 22B | 14GB | 24GB | 32GB | RTX 3090 |
-| Qwen 2.5 Coder 32B | 20GB | 36GB | 48GB | RTX 3090 |
-| Llama 3.1 70B | 42GB | 80GB | 96GB | 2x RTX 3090 |
-| DeepSeek V2 (236B MoE) | 48GB* | 90GB | 128GB | 2x RTX 4090 |
+| Model Class | VRAM (4-bit) | VRAM (8-bit) | RAM (CPU) | Min GPU |
+|-------------|-------------|-------------|-----------|---------|
+| Small (3-8B) | 3-6GB | 5-10GB | 8-16GB | None / GTX 1660 |
+| Mid (14-32B) | 10-20GB | 18-36GB | 32-48GB | RTX 3090 |
+| Large (70B) | 42GB | 80GB | 96GB | 2x RTX 3090 |
+| MoE flagship (open-weight, e.g. GLM-5.3, Kimi K3) | 48GB+* | 90GB+ | 128GB+ | 2x RTX 4090 |
 
 *MoE models require less VRAM for inference than parameter count suggests
 
@@ -661,16 +656,16 @@ Download from https://ollama.com/download
 
 **Pull Models:**
 ```bash
-ollama pull llama3.1:70b
-ollama pull qwen2.5-coder:32b
-ollama pull deepseek-coder-v2
-ollama pull codestral:22b
+ollama pull glm-5.3
+ollama pull deepseek-v4.1-flash
+ollama pull qwen3.8
+ollama pull codestral
 ```
 
 **Run Models:**
 ```bash
-ollama run llama3.1:70b
-ollama run qwen2.5-coder:32b "Explain async/await in JavaScript"
+ollama run glm-5.3
+ollama run deepseek-v4.1-flash "Explain async/await in JavaScript"
 ```
 
 ### LM Studio
@@ -692,15 +687,27 @@ ollama run qwen2.5-coder:32b "Explain async/await in JavaScript"
 
 **Setup:**
 1. Install Continue extension in VS Code
-2. Configure for local models:
+2. Configure models (cloud + local):
 
 ```json
 {
   "models": [
     {
-      "title": "Ollama",
+      "title": "Claude Sonnet 5.5",
+      "provider": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "apiKey": "YOUR_KEY"
+    },
+    {
+      "title": "GPT-6.1 Terra",
+      "provider": "openai",
+      "model": "gpt-6.1-terra"
+    },
+    {
+      "title": "GLM-5.3 (local)",
       "provider": "ollama",
-      "model": "qwen2.5-coder:32b"
+      "model": "glm-5.3",
+      "apiBase": "http://localhost:11434"
     }
   ]
 }
@@ -716,9 +723,9 @@ ollama run qwen2.5-coder:32b "Explain async/await in JavaScript"
 pip install vllm
 
 python -m vllm.entrypoints.api_server \
-    --model Qwen/Qwen2.5-Coder-32B-Instruct \
+    --model deepseek-ai/DeepSeek-V4.1-Flash \
     --tensor-parallel-size 2 \
-    --max-model-len 32768
+    --max-model-len 1048576
 ```
 
 ---
@@ -728,26 +735,30 @@ python -m vllm.entrypoints.api_server \
 ### Monthly Usage Scenarios
 
 **Casual Developer (1M tokens/month):**
-- GPT-4o: ~$10/month
-- Claude 3.5 Sonnet: ~$9/month
+- GPT-6.1 Terra: ~$6/month
+- Claude Sonnet 5.5: ~$6/month
 - Local model: ~$0.10/month (electricity)
 
 **Active Developer (10M tokens/month):**
-- GPT-4o: ~$100/month
-- Claude 3.5 Sonnet: ~$90/month
-- DeepSeek API: ~$2/month
+- Claude Sonnet 5.5: ~$60/month
+- GPT-6.1 Terra: ~$60/month
+- GPT-6 Astra (flagship-only workflow): ~$300/month
+- DeepSeek V4.1 Flash API: ~$4/month
 - Local model: ~$1/month
 
 **Team of 5 (50M tokens/month):**
-- GPT-4o: ~$500/month
-- Claude 3.5 Sonnet: ~$450/month
-- DeepSeek API: ~$10/month
+- Claude Sonnet 5.5: ~$300/month
+- Claude Opus 5.5 (agentic-heavy): ~$600/month
+- GPT-6 Astra (flagship-only): ~$1,500/month
+- DeepSeek V4.1 Flash API: ~$20/month
 - Local setup: ~$500 one-time hardware + ~$5/month
 
 **Enterprise (500M tokens/month):**
 - Negotiate custom API pricing
-- Consider self-hosting
+- Consider self-hosting open-weight models (GLM-5.3, DeepSeek V4)
 - Hybrid approach (cloud for peak, local for baseline)
+
+**⚠️ Watch token-based pricing:** Gartner (June 2026) warned that token-based pricing makes costs unpredictable — without budgets and routing rules, AI coding spend could exceed the average developer's salary by 2028. Route simple work to value-tier models and reserve flagships for hard problems.
 
 ### ROI Calculation
 
@@ -756,7 +767,7 @@ python -m vllm.entrypoints.api_server \
 - AI assists 2-5x productivity
 - 10 hours saved/week = $2000-4000/month value
 
-**Conclusion:** Even expensive API usage pays for itself
+**Conclusion:** Even expensive flagship usage pays for itself — but only if you route everyday work to mid-tier and value-tier models
 
 ---
 
@@ -764,20 +775,20 @@ python -m vllm.entrypoints.api_server \
 
 ### Model Selection Guidelines
 
-1. **Start with mid-tier models** (Claude 3.5 Sonnet, GPT-4o)
-2. **Use specialized models for specific tasks:**
-   - Quick autocomplete → Small local model
-   - Complex architecture → Claude 3 Opus / GPT-4o
-   - Code review → Claude 3.5 Sonnet
-   - Learning → GPT-4o
+1. **Start with mid-tier models** (Claude Sonnet 5.5, GPT-6.1 Sol, Gemini 4 Argon)
+2. **Use specialized tiers for specific tasks:**
+   - Quick autocomplete → Small local model / Claude Haiku 5.5 / GPT-6 Luna
+   - Complex multi-file agentic work → Claude Opus 5.5 / GPT-6 Astra / Claude Fable 5.1
+   - Code review → Claude Sonnet 5.5
+   - Learning → GPT-6.1 Terra
 
 3. **Implement fallback strategies:**
-   - Primary: Claude 3.5 Sonnet
-   - Fallback: GPT-4o
-   - Emergency: Local model
+   - Primary: Claude Sonnet 5.5
+   - Fallback: GPT-6.1 Sol
+   - Emergency: Local model (GLM-5.3 / DeepSeek V4.1 Flash)
 
 4. **Monitor usage and costs:**
-   - Set monthly budgets
+   - Set monthly budgets (token pricing scales fast)
    - Track token consumption
    - Optimize prompts to reduce tokens
 
@@ -831,32 +842,36 @@ python -m vllm.entrypoints.api_server \
 
 | Category | Model |
 |----------|-------|
-| Best Code Quality | Claude 3.5 Sonnet |
-| Best Reasoning | GPT-4o / o1 |
-| Best Value | DeepSeek V2.5 |
-| Best Local | Qwen 2.5 Coder 32B |
-| Best Context | Gemini 1.5 Pro |
-| Best for Learning | GPT-4o |
-| Best for Production | Claude 3.5 Sonnet |
-| Best for Privacy | Llama 3.1 70B (local) |
+| Best Code Quality | Claude Opus 5.5 |
+| Best Agentic / Long-Running Coding | Claude Opus 5.5 / Claude Fable 5.1 |
+| Best Reasoning | Claude Fable 5.1 / GPT-6 Astra |
+| Best Everyday Coding | Claude Sonnet 5.5 |
+| Best Value | GPT-6.1 Terra / DeepSeek V4.1 Flash |
+| Best Open-Weight | Kimi K3 / GLM-5.3 |
+| Best Context | 1M is standard — Claude Sonnet 5.5 / Gemini 4 Argon |
+| Best for Learning | GPT-6.1 Terra |
+| Best for Production | Claude Sonnet 5.5 / GPT-6.1 Sol |
+| Best for Privacy | GLM-5.3 (self-hosted) |
+| Best High-Volume / Low-Latency | Claude Haiku 5.5 / GPT-6 Luna |
 
 ### Recommended Starter Setup
 
 **Beginner:**
-- Primary: Claude 3.5 Sonnet (free tier)
-- Backup: GPT-4o mini
-- Local: Phi-3 Mini via Ollama
+- Primary: ChatGPT free tier / Claude free tier
+- Backup: GPT-6.1 Terra or Claude Haiku 5.5 (cheap API)
+- Local: GLM-5.3 via Ollama
 
 **Intermediate:**
-- Primary: Claude 3.5 Sonnet (paid)
-- Backup: GPT-4o
-- Local: Qwen 2.5 Coder 7B
+- Primary: Claude Sonnet 5.5 (via Pro/Max subscription or API)
+- Backup: GPT-6.1 Sol
+- Local: DeepSeek V4.1 Flash via Ollama
 
 **Advanced:**
-- Primary: Claude 3 Opus for complex tasks
-- Secondary: Claude 3.5 Sonnet for daily work
-- Local: Qwen 2.5 Coder 32B or Llama 3.1 70B
-- Specialized: DeepSeek Coder for pure coding
+- Primary: Claude Opus 5.5 for complex agentic tasks
+- Secondary: Claude Sonnet 5.5 for daily work
+- Long-horizon reasoning: Claude Fable 5.1 or GPT-6 Astra
+- Local: GLM-5.3 or Kimi K3 (open weights)
+- Value/volume: DeepSeek V4.1 Flash or Qwen3.8 Max
 
 ---
 
@@ -871,8 +886,10 @@ python -m vllm.entrypoints.api_server \
 
 ### Benchmark Sites
 
-- LMSys Chatbot Arena: https://chat.lmsys.org
-- Hugging Face Open LLM Leaderboard
+- BenchLeader (coding index): https://benchleader.ai
+- Terminal-bench (agentic coding): https://terminal-bench.io
+- LMArena (Chatbot Arena): https://lmarena.ai
+- SWE-bench / DeepSWE: https://www.swebench.com
 - Artificial Analysis: https://artificialanalysis.ai
 
 ### Community Resources
@@ -884,4 +901,4 @@ python -m vllm.entrypoints.api_server \
 
 ---
 
-*Last updated: December 2024*
+*Last updated: November 2026*

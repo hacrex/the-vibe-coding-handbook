@@ -1,7 +1,25 @@
 # Security in AI-Assisted Development
 
+*Last updated: November 2026*
+
 ## Introduction
 Security is paramount in software development, and AI-assisted coding introduces both opportunities and challenges. While AI can help identify vulnerabilities, generate secure code patterns, and automate security testing, it also requires careful oversight to prevent introducing new risks. This section covers how to leverage AI for building secure applications while understanding its limitations.
+
+## The State of AI Code Security (2026)
+
+AI now writes a large share of the world's code — and the data on what it ships is sobering. Before the techniques below, know the baseline you are working against:
+
+| Study / Source | What they found |
+|----------------|-----------------|
+| **Escape.tech** — scanned 1,400+ vibe-coded production applications | **65%** had security issues; **58%** had at least one *critical* issue |
+| **Veracode** — tested generated code from 100+ models | Only a **55% pass rate** against common vulnerability classes — unchanged across two years of model releases. Roughly **45% of samples ship an exploitable flaw** |
+| **CodeRabbit** — analyzed 470 open-source pull requests | AI-associated PRs contained **~1.7x** as many issues overall; security findings up to **2.74x** as common in some categories *(caveat: AI involvement had to be inferred from the PRs)* |
+| **Georgia Tech researchers** — scanned 43,000 security advisories across a 3-month window | **74 vulnerabilities** traced directly to AI-generated code, **14 critical**; they estimate the real number is **5–10x higher**, because only *disclosed* AI-generated code could be traced |
+| **OWASP** — risks in generative AI applications | Highlights application vulnerabilities and **inappropriate reliance on AI-generated output** as standing risks for teams building with (and on) AI |
+| **Sonar** (2026) | **96%** of developers don't fully trust AI-generated code to be functionally correct; only **48%** always check it before committing; **61%** say AI often produces code that *looks* correct but is unreliable |
+| **Gartner** (Nov 2026) — *"Vibe Coding Is Cool, Until It Doesn't Work"* | Citizen developers get trapped in prompting/troubleshooting/rework cycles; enterprise leaders must establish **guardrails, governance, and support models** |
+
+**Takeaway:** fast code is not safe code. Model generations keep improving, yet Veracode's pass rate hasn't moved in two years — so treat every AI-generated line as untrusted until a human has reviewed it, tests have exercised it, and scanners have cleared it.
 
 ## AI for Secure Code Generation
 
@@ -93,6 +111,8 @@ security-scan:
 **Prompt for CI:**
 > "Add a GitHub Actions job that runs Trivy for container scanning and fails the build if critical vulnerabilities are found."
 
+**2026 baseline:** run these scans on *every* pull request, not just nightly builds — agent-authored changes are now a large share of what enters repos (see [Securing Coding Agents](#securing-coding-agents-2026-consensus-practices)).
+
 ## Common Security Pitfalls in AI Code
 
 ### 1. False Sense of Security
@@ -101,6 +121,7 @@ security-scan:
 - Treat all AI code as untrusted until reviewed
 - Use security checklists specific to your tech stack
 - Implement defense in depth
+- Remember the 2026 baseline: 58% of vibe-coded production apps had at least one critical issue (Escape.tech)
 
 ### 2. Hallucinated Security Functions
 **Risk:** AI invents non-existent security libraries or methods
@@ -151,6 +172,38 @@ When reviewing AI-generated security code:
 - [ ] Are security headers configured properly?
 - [ ] Is logging implemented for security events?
 - [ ] Are dependencies up-to-date and vulnerability-free?
+
+## Securing Coding Agents: 2026 Consensus Practices
+
+As coding agents move from autocomplete to autonomous multi-file runs, the security community has converged on a practical baseline. Whether you use Claude Code, Cursor agents, Copilot's coding agent, or your own scaffold, the 2026 consensus is:
+
+1. **Automated scanning on every pull request** — SAST, dependency checks, and secret detection gate *every* change, whether a human or an agent wrote it.
+2. **Minimal permissions for coding agents** — least privilege by default: scope the agent's access to the task at hand and run it in sandboxed/isolated environments.
+3. **Protected credentials and API keys** — never paste secrets into model context or prompts; use a secret manager with short-lived, scoped tokens instead.
+4. **Human approval before production changes and sensitive actions** — no agent pushes straight to prod or touches regulated data unreviewed.
+5. **Tests focused on likely security threats** — threat-model-driven tests that target the specific ways *your* application can be attacked, not just happy paths.
+6. **Checkpoints and rollback for long agent runs** — reversible changes and restore points so a hundred-step agent run can be undone at any step.
+7. **Approval gates before irreversible or outward-facing actions** — sending emails, deleting data, spending money, and deploying always require an explicit human "yes".
+
+**Agent security checklist:**
+- [ ] Every PR (human or agent) passes automated security scanning
+- [ ] Agents run with least-privilege credentials in isolated/sandboxed environments
+- [ ] Secrets never enter the prompt/context — only the secret manager does
+- [ ] A human approves all production and sensitive changes
+- [ ] Threat-model-driven tests cover the app's likely attack paths
+- [ ] Long agent runs have checkpoints and a tested rollback path
+- [ ] Irreversible and outward-facing actions hit an approval gate
+
+## AI Slop & Governance: Owning Machine-Generated Code
+
+> "The majority of code is now machine-generated." — Oracle SVP, 2026
+
+Machine-generated code is still *your* code: someone must maintain it, audit it, and answer for it when it breaks. That makes AI slop a governance problem, not just a quality one.
+
+- **Govern the output, not just the prompt.** Sprawling generated code buries intent and makes audits harder. Oracle's APEXlang approach (Nov 2026) argues for compact, intent-level definitions — describing *what* the application should do in a small, reviewable spec — which are far easier to audit than thousands of lines of generated boilerplate.
+- **Guardrails for citizen developers.** Gartner (Nov 2026) recommends that enterprise leaders establish guardrails, governance, and support models before vibe coding scales: who can generate what, who reviews it, and who may deploy it.
+- **Ownership doesn't transfer to the model.** The team shipping the app owns its vulnerabilities, its compliance posture, and its outages — regardless of whether a human or an agent typed the code.
+- **Budget for maintenance.** Code that took minutes to generate can still take years to maintain; treat AI-heavy codebases as legacy code from day one (readable structure, tests, documentation, clear boundaries).
 
 ## Compliance & Regulatory Considerations
 
@@ -203,3 +256,5 @@ AI can help implement compliance requirements:
 
 ## Conclusion
 AI is a powerful ally in building secure applications, but it's not a replacement for security expertise. By combining AI's ability to generate code, detect vulnerabilities, and automate testing with human judgment and security best practices, developers can create more secure software faster. The key is to maintain a healthy skepticism, verify all security-critical code, and stay informed about evolving threats and defenses.
+
+The 2026 evidence makes that skepticism concrete: 65% of scanned vibe-coded production apps had security issues, generated code passes common vulnerability checks only about half the time regardless of model generation, and the majority of code now entering the world is machine-generated. Fast generation has made security *more* important, not less — scanning every pull request, constraining agent permissions, and keeping humans at the approval gates are what turn AI speed into shipped, trustworthy software.

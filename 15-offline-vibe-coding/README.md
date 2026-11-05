@@ -327,40 +327,42 @@ open-webui serve
 
 ## 🏆 Best Local Models for Coding
 
-### Top Recommendations (2024)
+### Top Recommendations (2026)
 
-#### 1. **DeepSeek Coder V2** ⭐⭐⭐⭐⭐
-- Sizes: 1.3B, 6.7B, 16B, 33B
-- Strengths: Best overall coding performance
-- Languages: 338 programming languages
-- Context: Up to 128K tokens
-
-```bash
-ollama pull deepseek-coder:6.7b
-```
-
-#### 2. **Qwen 2.5 Coder** ⭐⭐⭐⭐⭐
-- Sizes: 1.5B, 7B, 14B, 32B
-- Strengths: Excellent code understanding
-- Special: Strong in competitive programming
+#### 1. **DeepSeek V4 Flash** ⭐⭐⭐⭐⭐
+- Sizes: small/dense variants
+- Strengths: Best open-weight coding performance, fast
+- Context: 1M tokens
 
 ```bash
-ollama pull qwen2.5-coder:7b
+ollama pull deepseek-v4-flash
 ```
 
-#### 3. **CodeLlama** ⭐⭐⭐⭐
-- Sizes: 7B, 13B, 34B, 70B
-- Strengths: Meta's official coding model
-- Variants: Python, Instruct, Base
+#### 2. **GLM-5.3** ⭐⭐⭐⭐⭐
+- Sizes: 1M context variant
+- Strengths: Excellent code understanding, strong long-context
+- Context: 1M tokens
 
 ```bash
-ollama pull codellama:7b-instruct
+ollama pull glm-5.3
 ```
 
-#### 4. **Llama 3.2** ⭐⭐⭐⭐
-- Sizes: 1B, 3B, 7B, 14B
-- Strengths: General purpose, good coding
-- Best for: Mixed coding + explanation tasks
+#### 3. **Kimi K3** ⭐⭐⭐⭐
+- Sizes: 1M+ context
+- Strengths: Top open-weight model on coding benchmarks
+- Context: 1M+ tokens
+
+```bash
+ollama pull kimi-k3
+```
+
+#### 4. **DeepSeek V4 Pro** ⭐⭐⭐⭐
+- Strong general coding, larger variant
+- Context: 1M tokens
+
+```bash
+ollama pull deepseek-v4
+```
 
 ```bash
 ollama pull llama3.2:7b
@@ -420,7 +422,7 @@ Install: Continue - Edit code with AI
   "tabAutocompleteModel": {
     "title": "Autocomplete",
     "provider": "ollama",
-    "model": "deepseek-coder:6.7b"
+    "model": "deepseek-v4-flash"
   }
 }
 ```
@@ -449,7 +451,7 @@ require('copilot').setup({
   servers = {
     {
       url = "http://localhost:11434",
-      model = "deepseek-coder:6.7b"
+      model = "deepseek-v4-flash"
     }
   }
 })
@@ -523,7 +525,7 @@ Code:
 
 Return only the refactored code, no explanations."""
 
-    response = chat(model='codellama:7b', messages=[
+    response = chat(model='deepseek-v4-flash', messages=[
         {'role': 'user', 'content': prompt}
     ])
     
@@ -537,10 +539,10 @@ Return only the refactored code, no explanations."""
 Create specialized agents:
 ```python
 agents = {
-    'architect': 'llama3.2:14b',  # High-level design
-    'coder': 'deepseek-coder:6.7b',  # Implementation
-    'reviewer': 'qwen2.5-coder:7b',  # Code review
-    'tester': 'codellama:7b'  # Test generation
+    'architect': 'glm-5.3',  # High-level design, long context
+    'coder': 'deepseek-v4-flash',  # Implementation
+    'reviewer': 'kimi-k3',  # Code review
+    'tester': 'deepseek-v4-flash'  # Test generation
 }
 
 def build_feature(requirement):
@@ -648,7 +650,7 @@ def benchmark(model_name, prompt="Write a quicksort implementation"):
 # Test different models
 benchmark('phi3:mini')
 benchmark('llama3.2:7b')
-benchmark('deepseek-coder:6.7b')
+benchmark('deepseek-v4-flash')
 ```
 
 ---
