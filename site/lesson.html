@@ -1576,6 +1576,11 @@
           <svg class="star-icon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.896l-7.416 3.517 1.48-8.279L0 9.306l8.332-1.151z"/></svg>
           <span class="star-count" data-loading="true" aria-label="GitHub stars">…</span>
         </a>
+        <div class="font-controls" id="fontControls" style="display:none;">
+          <button class="btn-font" data-size="small" type="button" title="Smaller text">A−</button>
+          <button class="btn-font" data-size="medium" type="button" title="Normal text">A</button>
+          <button class="btn-font" data-size="large" type="button" title="Larger text">A+</button>
+        </div>
       </nav>
       <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" type="button">
         <span></span><span></span><span></span>
@@ -1914,6 +1919,37 @@
       function renderLesson(md) {
         var el = document.getElementById('lessonContent');
         var html = parseMd(md);
+
+        // Calculate reading time (~200 WPM)
+        var textForCount = md
+          .replace(/#{1,6}\s+/g, ' ')
+          .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+          .replace(/`([^`]+)`/g, '$1')
+          .replace(/#{1,6}\s/g, ' ')
+          .replace(/[*_~`]/g, ' ')
+          .replace(/\[![^\]]*\]\([^)]*\)/g, ' ');
+        var words = textForCount.trim().split(/\s+/).filter(function (w) { return w.length > 0; }).length;
+        var minutes = Math.ceil(words / 200);
+        if (minutes < 1) minutes = 1;
+
+        var rtHtml = '<div class="reading-time">~' + minutes + ' min read</div>';
+        html = html.replace(/(<h1[^>]*>.*?<\/h1>)/i, '$1' + rtHtml);
+
+        // Breadcrumbs
+        var bcHtml = '';
+        if (typeof flatLessons !== 'undefined' && currentPhaseIndex >= 0) {
+          var phase = PHASES[currentPhaseIndex];
+          var phaseSlug = (phase.url ? phase.url.match(/tree\/main\/(.+?)\/?$/)[1] : String(phase.id).padStart(2, '0') + '-' + phase.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''));
+          bcHtml += '<div class="breadcrumbs">';
+          bcHtml += '<a href="index.html">Handbook</a>';
+          bcHtml += '<span class="breadcrumb-sep">›</span>';
+          bcHtml += '<a href="catalog.html?phase=' + String(phase.id) + '">' + escapeHtml(phase.name) + '</a>';
+          bcHtml += '<span class="breadcrumb-sep">›</span>';
+          bcHtml += '<span>' + escapeHtml(lessonNameFromPath(lessonPath)) + '</span>';
+          bcHtml += '</div>';
+          html = bcHtml + html;
+        }
+
         html += '<div class="ai-panels" id="aiPanels"></div>';
         html = addBottomNav(html);
         el.innerHTML = '<article class="lesson-article">' + html + '</article>';
@@ -2435,10 +2471,21 @@
         return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
       }
 
+      function lessonNameFromPath(path) {
+        if (!path || typeof flatLessons === 'undefined') return 'Lesson';
+        for (var i = 0; i < flatLessons.length; i++) {
+          if (flatLessons[i].path === path) return flatLessons[i].lessonName;
+        }
+        // Fallback: derive from path slug
+        var parts = path.split('/');
+        var last = parts[parts.length - 1] || '';
+        return last.replace(/^\d+-\s*/, '').replace(/-/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+      }
+
       function renderCodeBlock(code, lang) {
         var highlighted = highlightSyntax(escapeHtml(code), lang);
         var langLabel = lang ? '<span class="code-lang">' + escapeHtml(lang) + '</span>' : '';
-        return '<pre>' + langLabel + '<button class="code-copy" data-code="' + escapeAttr(code) + '">Copy</button><code>' + highlighted + '</code></pre>';
+        return '<pre style="position:relative">' + langLabel + '<button class="code-copy-all" data-code="' + escapeAttr(code) + '">Copy all</button><button class="code-copy" data-code="' + escapeAttr(code) + '">Copy</button><code>' + highlighted + '</code></pre>';
       }
 
       function highlightSyntax(code, lang) {
@@ -2488,6 +2535,15 @@
             navigator.clipboard.writeText(code).then(function () {
               btn.textContent = 'Copied!';
               setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+            });
+          });
+        });
+        document.querySelectorAll('.code-copy-all').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var code = btn.getAttribute('data-code');
+            navigator.clipboard.writeText(code).then(function () {
+              btn.textContent = 'Copied!';
+              setTimeout(function () { btn.textContent = 'Copy all'; }, 1500);
             });
           });
         });
@@ -3329,6 +3385,24 @@
             alert('Failed to load file content: ' + err.message);
           });
       }
+
+      // Font-size adjuster
+      (function () {
+        var size = localStorage.getItem('aifs:font-size') || 'medium';
+        document.body.classList.add('font-size-' + size);
+        var fc = document.getElementById('fontControls');
+        if (fc) fc.style.display = 'flex';
+        document.querySelectorAll('.btn-font').forEach(function (b) {
+          if (b.getAttribute('data-size') === size) b.style.opacity = '0.6';
+          b.addEventListener('click', function () {
+            var s = b.getAttribute('data-size');
+            document.body.className = document.body.className.replace(/font-size-\w+/g, '');
+            document.body.classList.add('font-size-' + s);
+            localStorage.setItem('aifs:font-size', s);
+            document.querySelectorAll('.btn-font').forEach(function (x) { x.style.opacity = x.getAttribute('data-size') === s ? '0.6' : '1'; });
+          });
+        });
+      })();
     })();
   </script>
 </body>

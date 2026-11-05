@@ -247,6 +247,12 @@
       <div class="catalog-header">
         <h1>Lesson Catalog</h1>
         <p>Every lesson across all 46 phases. Search, filter, sort.</p>
+        <button class="btn-random" id="btnRandomLesson" type="button" title="Random lesson">Random lesson</button>
+        <div class="font-controls" id="fontControls" style="display:none;">
+          <button class="btn-font" data-size="small" type="button" title="Smaller text">A−</button>
+          <button class="btn-font" data-size="medium" type="button" title="Normal text">A</button>
+          <button class="btn-font" data-size="large" type="button" title="Larger text">A+</button>
+        </div>
       </div>
       <div class="catalog-controls">
         <input type="text" class="catalog-search" id="catalogSearch" placeholder="Search lessons...">
@@ -472,6 +478,45 @@
         render();
       });
     })();
+
+    (function () {
+      var btn = document.getElementById('btnRandomLesson');
+      if (btn && typeof PHASES !== 'undefined') {
+        btn.addEventListener('click', function () {
+          var flat = [];
+          for (var i = 0; i < PHASES.length; i++) {
+            var p = PHASES[i];
+            for (var j = 0; j < p.lessons.length; j++) {
+              var l = p.lessons[j];
+              if (l.url) {
+                var mTree = l.url.match(/tree\/main\/(.+?)\/?$/);
+                if (mTree) flat.push(mTree[1]);
+              }
+            }
+          }
+          if (flat.length) {
+            var path = flat[Math.floor(Math.random() * flat.length)];
+            window.location.href = 'lesson.html?path=' + path;
+          }
+        });
+      }
+    })();
+
+    (function () {
+      var size = localStorage.getItem('aifs:font-size') || 'medium';
+      document.body.classList.add('font-size-' + size);
+      var fc = document.getElementById('fontControls');
+      if (fc) fc.style.display = 'flex';
+      document.querySelectorAll('.btn-font').forEach(function (b) {
+        if (b.getAttribute('data-size') === size) b.style.opacity = '0.6';
+        b.addEventListener('click', function () {
+          var s = b.getAttribute('data-size');
+          document.body.className = document.body.className.replace(/font-size-\w+/g, '');
+          document.body.classList.add('font-size-' + s);
+          localStorage.setItem('aifs:font-size', s);
+          document.querySelectorAll('.btn-font').forEach(function (x) { x.style.opacity = x.getAttribute('data-size') === s ? '0.6' : '1'; });
+        });
+      })();
   </script>
 <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
 </body>
