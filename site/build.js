@@ -81,14 +81,16 @@ function parseReadme(content, roadmapStatuses) {
     }
     
     // === NEW FORMAT: Parse section table rows ===
-    // Format: | [00-introduction](./00-introduction/) | Welcome & Overview | 🟡 In Progress |
+    // Format: | [00-introduction](./00-introduction/) | Welcome & Overview | 🟡 Intermediate | 🟡 In Progress |
     if (currentSectionGroup && line.match(/^\|\s*\[?\d+-/)) {
       const cols = line.split('|').map(c => c.trim()).filter(c => c.length > 0);
       if (cols.length >= 3) {
         const sectionCell = cols[0];
         const titleCell = cols[1];
-        const statusCell = cols[2];
-        
+        const statusCell = cols[cols.length - 1]; // last col is status
+        // Difficulty is the column before status (if present)
+        const difficultyCell = cols.length >= 4 ? cols[cols.length - 2] : '';
+
         // Extract section number and name from link
         const linkMatch = sectionCell.match(/\[(\d+)-([^\]]+)\]\(([^)]+)\)/);
         if (linkMatch) {
@@ -97,18 +99,25 @@ function parseReadme(content, roadmapStatuses) {
           const NAME_FIXES = { 'Ai': 'AI', 'Rag': 'RAG', 'Ide': 'IDE', 'Ides': 'IDEs', 'Ids': 'IDs', 'Devops': 'DevOps', 'Nosql': 'NoSQL', 'Sql': 'SQL', 'Rest Api': 'REST API', 'Api': 'API', 'Json': 'JSON', 'Llm': 'LLM', 'Ui': 'UI', 'Ux': 'UX', 'Css': 'CSS', 'Html': 'HTML', 'Js': 'JS', 'Ts': 'TS' };
           const sectionName = rawName.replace(/\b[A-Za-z\/]+\b/g, function (m) { return NAME_FIXES[m] || m; });
           const relativePath = linkMatch[3];
-          
+
           // Determine status from emoji
           let phaseStatus = 'planned';
           if (statusCell.includes('🟡')) phaseStatus = 'in-progress';
           else if (statusCell.includes('✅')) phaseStatus = 'complete';
           else if (statusCell.includes('⬚') || statusCell.includes('◻')) phaseStatus = 'planned';
-          
+
+          // Determine difficulty from emoji
+          let phaseDifficulty = 'unknown';
+          if (difficultyCell.includes('🟢')) phaseDifficulty = 'beginner';
+          else if (difficultyCell.includes('🟡')) phaseDifficulty = 'intermediate';
+          else if (difficultyCell.includes('🔴')) phaseDifficulty = 'advanced';
+
           // Create a phase for each section
           const phase = {
             id: sectionNum,
             name: sectionName,
             status: phaseStatus,
+            difficulty: phaseDifficulty,
             desc: titleCell,
             lessons: [{
               name: titleCell,
@@ -361,6 +370,41 @@ var GLOSSARY = ${JSON.stringify(glossaryTerms, null, 2)};
 
   fs.writeFileSync(OUTPUT_PATH, output, 'utf8');
   console.log(`\n✅ Generated ${OUTPUT_PATH}`);
+
+  // Generate RSS feed
+  const SITE_URL = 'https://vibingcode.dev';
+  const now = new Date().toUTCString();
+  const rssItems = phases.map(p => {
+    const encodedTitle = p.name.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const encodedDesc = (p.desc || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const link = p.lessons[0] && p.lessons[0].url ? p.lessons[0].url : `${SITE_URL}/`;
+    return `  <item>
+    <title>${encodedTitle}</title>
+    <link>${link}</link>
+    <guid isPermaLink="true">${link}</guid>
+    <pubDate>${now}</pubDate>
+    <description>${encodedDesc}</description>
+    <category>${p.difficulty !== 'unknown' ? p.difficulty : 'unknown'}</category>
+  </item>`;
+  }).join('\n');
+
+  const rssFeed = `<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The Vibe Coding Handbook</title>
+    <link>${SITE_URL}/</link>
+    <description>The complete open-source handbook for AI-assisted software development.</description>
+    <language>en-us</language>
+    <lastBuildDate>${now}</lastBuildDate>
+    <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml" />
+    ${rssItems}
+  </channel>
+</rss>
+`;
+
+  const RSS_PATH = path.join(__dirname, 'feed.xml');
+  fs.writeFileSync(RSS_PATH, rssFeed, 'utf8');
+  console.log(`✅ Generated ${RSS_PATH}`);
 }
 
 build();

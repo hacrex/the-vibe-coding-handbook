@@ -16,6 +16,7 @@
   <meta name="twitter:description" content="Browse all lessons across 46 sections of the Vibe Coding Handbook.">
   <meta name="twitter:image" content="https://vibingcode.dev/og-image.png?v=2">
   <link rel="canonical" href="https://vibingcode.dev/catalog.html">
+  <link rel="alternate" type="application/rss+xml" title="The Vibe Coding Handbook" href="feed.xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=VT323&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -264,6 +265,9 @@
           <option value="complete">Complete</option>
           <option value="planned">Planned</option>
         </select>
+        <select class="catalog-filter" id="catalogDifficulty">
+          <option value="">All Difficulty</option>
+        </select>
       </div>
       <div class="catalog-count" id="catalogCount"></div>
       <div class="catalog-table-wrap">
@@ -275,6 +279,7 @@
               <th data-sort="type">Type <span class="sort-arrow"></span></th>
               <th data-sort="lang">Language <span class="sort-arrow"></span></th>
               <th data-sort="status">Status <span class="sort-arrow"></span></th>
+              <th data-sort="difficulty">Difficulty <span class="sort-arrow"></span></th>
             </tr>
           </thead>
           <tbody id="catalogBody"></tbody>
@@ -331,6 +336,8 @@
           });
         }
 
+        var difficultyValues = new Set();
+        var difficultySelect = document.getElementById('catalogDifficulty');
         var allRows = [];
         var phaseSelect = document.getElementById('catalogPhase');
 
@@ -340,6 +347,18 @@
           opt.value = String(p.id);
           opt.textContent = String(p.id).padStart(2, '0') + ' - ' + p.name;
           phaseSelect.appendChild(opt);
+
+          // Collect unique difficulty values
+          if (p.difficulty && p.difficulty !== 'unknown') {
+            if (!difficultyValues.has(p.difficulty)) {
+              difficultyValues.add(p.difficulty);
+              var dOpt = document.createElement('option');
+              dOpt.value = p.difficulty;
+              var dLabel = p.difficulty.charAt(0).toUpperCase() + p.difficulty.slice(1);
+              dOpt.textContent = dLabel;
+              difficultySelect.appendChild(dOpt);
+            }
+          }
 
           for (var j = 0; j < p.lessons.length; j++) {
             var l = p.lessons[j];
@@ -360,6 +379,7 @@
             allRows.push({
               phase: p.id,
               phaseName: p.name,
+              difficulty: p.difficulty || 'unknown',
               name: l.name,
               type: l.type,
               lang: l.lang,
@@ -371,6 +391,7 @@
 
         var searchInput = document.getElementById('catalogSearch');
         var statusSelect = document.getElementById('catalogStatus');
+        var difficultySelect = document.getElementById('catalogDifficulty');
         var bodyEl = document.getElementById('catalogBody');
         var countEl = document.getElementById('catalogCount');
         var sortCol = 'phase';
@@ -386,10 +407,12 @@
           var query = (searchInput.value || '').toLowerCase().trim();
           var phaseFilter = phaseSelect.value;
           var statusFilter = statusSelect.value;
+          var difficultyFilter = difficultySelect ? difficultySelect.value : '';
 
           var rows = allRows.filter(function (r) {
             if (phaseFilter && String(r.phase) !== phaseFilter) return false;
             if (statusFilter && r.status !== statusFilter) return false;
+            if (difficultyFilter && r.difficulty !== difficultyFilter) return false;
             if (query) {
               return r.name.toLowerCase().indexOf(query) !== -1 ||
                 r.phaseName.toLowerCase().indexOf(query) !== -1 ||
@@ -416,6 +439,9 @@
             } else if (sortCol === 'status') {
               va = a.status;
               vb = b.status;
+            } else if (sortCol === 'difficulty') {
+              va = a.difficulty || '';
+              vb = b.difficulty || '';
             }
             if (va < vb) return -1 * sortDir;
             if (va > vb) return 1 * sortDir;
@@ -442,6 +468,8 @@
             html += '<td>' + escapeHtml(r.type) + '</td>';
             html += '<td><span class="catalog-lang">' + escapeHtml(r.lang) + '</span></td>';
             html += '<td><span class="catalog-status-dot ' + r.status + '"></span>' + r.status + '</td>';
+            var dLabel = r.difficulty.charAt(0).toUpperCase() + r.difficulty.slice(1);
+            html += '<td><span class="catalog-lang">' + escapeHtml(dLabel) + '</span></td>';
             html += '</tr>';
           }
           bodyEl.innerHTML = html;
@@ -457,6 +485,7 @@
         searchInput.addEventListener('input', render);
         phaseSelect.addEventListener('change', render);
         statusSelect.addEventListener('change', render);
+        if (difficultySelect) difficultySelect.addEventListener('change', render);
 
         document.querySelectorAll('.catalog-table th[data-sort]').forEach(function (th) {
           th.addEventListener('click', function () {

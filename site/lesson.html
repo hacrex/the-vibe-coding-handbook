@@ -15,6 +15,7 @@
   <meta name="twitter:title" content="Lesson — The Vibe Coding Handbook">
   <meta name="twitter:description" content="Hands-on lesson from the Vibe Coding Handbook. Learn AI-assisted development.">
   <meta name="twitter:image" content="https://vibingcode.dev/og-image.png?v=2">
+  <link rel="alternate" type="application/rss+xml" title="The Vibe Coding Handbook" href="feed.xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=VT323&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -1611,6 +1612,29 @@
     </div>
   </div>
 
+  <div class="certificate-modal" id="certificateModal" aria-hidden="true">
+    <div class="certificate-content">
+      <button class="certificate-close" id="certificateClose">×</button>
+      <div class="certificate-frame" id="certificateFrame">
+        <div class="certificate-seal">VC</div>
+        <h1 class="certificate-title">Certificate of Completion</h1>
+        <p class="certificate-subtitle">This is awarded to</p>
+        <div class="certificate-details">
+          <div class="certificate-name" id="certName">Vibe Coder</div>
+          <div class="certificate-date" id="certDate"></div>
+        </div>
+        <p class="certificate-subtitle" style="margin-top:30px;">for successfully completing</p>
+        <div class="certificate-details" style="margin-bottom:40px;">
+          <div class="certificate-name" id="certPhase"></div>
+        </div>
+      </div>
+      <div class="certificate-actions">
+        <button class="certificate-btn certificate-btn-primary" id="certDownload">Download SVG</button>
+        <button class="certificate-btn" id="certClose">Close</button>
+      </div>
+    </div>
+  </div>
+
   <div class="lesson-layout">
     <aside class="lesson-sidebar" id="lessonSidebar"></aside>
     <main class="lesson-main">
@@ -1950,6 +1974,9 @@
           var doneInPhase = phaseLessons.filter(function (fl) { return fl.status === 'complete'; }).length;
           var pct = totalInPhase > 0 ? Math.round((doneInPhase / totalInPhase) * 100) : 0;
           extraHtml += '<div class="lesson-progress">' + doneInPhase + ' / ' + totalInPhase + ' lessons in this phase</div><div class="lesson-progress-bar"><div class="lesson-progress-fill" style="width:' + pct + '%"></div></div>';
+          if (doneInPhase === totalInPhase && totalInPhase > 0) {
+            extraHtml += '<div class="lesson-share" style="margin-top:16px;"><button class="btn-certificate" id="btnCertificate" type="button" title="Download certificate">🎓 Download Certificate</button></div>';
+          }
         }
 
         // Share lesson button (copy URL to clipboard)
@@ -1976,6 +2003,22 @@
 
         html += '<div class="ai-panels" id="aiPanels"></div>';
         html = addBottomNav(html);
+
+        // Related lessons from same phase
+        var relatedHtml = '';
+        if (typeof flatLessons !== 'undefined' && currentPhaseIndex >= 0) {
+          var phase = PHASES[currentPhaseIndex];
+          var siblings = flatLessons.filter(function (fl) { return fl.phaseIndex === currentPhaseIndex && fl.lessonIndex !== currentLessonIndex; });
+          if (siblings.length > 0) {
+            relatedHtml = '<div class="related-lessons" style="margin-top:48px;"><h3 style="font-family:' + (getComputedStyle ? getComputedStyle(document.documentElement).getPropertyValue('--font-mono') : 'JetBrains Mono') + ';font-size:0.85rem;letter-spacing:0.1em;text-transform:uppercase;color:' + (getComputedStyle ? getComputedStyle(document.documentElement).getPropertyValue('--blueprint') : '#d96c4f') + ';margin-bottom:16px;">Related in this phase</h3><div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:16px;">';
+            siblings.forEach(function (sib) {
+              relatedHtml += '<a href="lesson.html?path=' + sib.path + '" style="flex:0 0 auto;border:1px solid var(--rule-soft);padding:12px 16px;background:' + (getComputedStyle ? getComputedStyle(document.documentElement).getPropertyValue('--bg-surface') : '#f5f3ef') + ';color:var(--ink);text-decoration:none;font-size:0.9rem;min-width:140px;">' + escapeHtml(sib.lessonName) + '</a>';
+            });
+            relatedHtml += '</div></div>';
+          }
+        }
+        html += relatedHtml;
+
         el.innerHTML = '<article class="lesson-article">' + html + '</article>';
 
         document.title = extractTitle(md) + ' - The Vibe Coding Handbook';
@@ -3422,6 +3465,141 @@
             });
           });
         }
+      })();
+
+      // Certificate modal
+      (function () {
+        var modal = document.getElementById('certificateModal');
+        var closeBtn = document.getElementById('certificateClose');
+        var closeBtn2 = document.getElementById('certClose');
+        var downloadBtn = document.getElementById('certDownload');
+        var certBtn = document.getElementById('btnCertificate');
+        var certName = document.getElementById('certName');
+        var certDate = document.getElementById('certDate');
+        var certPhase = document.getElementById('certPhase');
+        var frame = document.getElementById('certificateFrame');
+
+        if (!modal || !closeBtn) return;
+
+        function openCert() {
+          if (typeof flatLessons === 'undefined' || currentPhaseIndex < 0) return;
+          var phase = PHASES[currentPhaseIndex];
+          if (!phase) return;
+          certName.textContent = 'Vibe Coder';
+          certDate.textContent = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+          certPhase.textContent = phase.name;
+          modal.setAttribute('aria-hidden', 'false');
+          modal.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        }
+
+        function closeCert() {
+          modal.setAttribute('aria-hidden', 'true');
+          modal.style.display = 'none';
+          document.body.style.overflow = '';
+        }
+
+        if (certBtn) certBtn.addEventListener('click', openCert);
+        closeBtn.addEventListener('click', closeCert);
+        closeBtn2.addEventListener('click', closeCert);
+        modal.addEventListener('click', function (e) { if (e.target === modal) closeCert(); });
+
+        downloadBtn.addEventListener('click', function () {
+          var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+          svg.setAttribute('width', '800');
+          svg.setAttribute('height', '600');
+          svg.setAttribute('viewBox', '0 0 800 600');
+          svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+
+          var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+          rect.setAttribute('width', '800');
+          rect.setAttribute('height', '600');
+          rect.setAttribute('fill', '#faf9f7');
+          rect.setAttribute('stroke', '#1a1a1a');
+          rect.setAttribute('stroke-width', '4');
+          svg.appendChild(rect);
+
+          var seal = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          seal.setAttribute('cx', '400');
+          seal.setAttribute('cy', '90');
+          seal.setAttribute('r', '40');
+          seal.setAttribute('fill', '#d96c4f');
+          svg.appendChild(seal);
+
+          var title = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          title.setAttribute('x', '400');
+          title.setAttribute('y', '160');
+          title.setAttribute('text-anchor', 'middle');
+          title.setAttribute('font-family', 'JetBrains Mono, monospace');
+          title.setAttribute('font-size', '32');
+          title.setAttribute('fill', '#1a1a1a');
+          title.setAttribute('font-weight', 'bold');
+          title.textContent = 'CERTIFICATE OF COMPLETION';
+          svg.appendChild(title);
+
+          var subtitle = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          subtitle.setAttribute('x', '400');
+          subtitle.setAttribute('y', '210');
+          subtitle.setAttribute('text-anchor', 'middle');
+          subtitle.setAttribute('font-family', 'Source Serif 4, serif');
+          subtitle.setAttribute('font-size', '18');
+          subtitle.setAttribute('fill', '#4a4a4a');
+          subtitle.textContent = 'This is awarded to';
+          svg.appendChild(subtitle);
+
+          var nameText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          nameText.setAttribute('x', '400');
+          nameText.setAttribute('y', '260');
+          nameText.setAttribute('text-anchor', 'middle');
+          nameText.setAttribute('font-family', 'JetBrains Mono, monospace');
+          nameText.setAttribute('font-size', '28');
+          nameText.setAttribute('fill', '#d96c4f');
+          nameText.setAttribute('font-weight', 'bold');
+          nameText.textContent = certName ? certName.textContent : 'Vibe Coder';
+          svg.appendChild(nameText);
+
+          var forText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          forText.setAttribute('x', '400');
+          forText.setAttribute('y', '320');
+          forText.setAttribute('text-anchor', 'middle');
+          forText.setAttribute('font-family', 'Source Serif 4, serif');
+          forText.setAttribute('font-size', '18');
+          forText.setAttribute('fill', '#4a4a4a');
+          forText.textContent = 'for successfully completing';
+          svg.appendChild(forText);
+
+          var phaseText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          phaseText.setAttribute('x', '400');
+          phaseText.setAttribute('y', '370');
+          phaseText.setAttribute('text-anchor', 'middle');
+          phaseText.setAttribute('font-family', 'JetBrains Mono, monospace');
+          phaseText.setAttribute('font-size', '24');
+          phaseText.setAttribute('fill', '#1a1a1a');
+          phaseText.setAttribute('font-weight', 'bold');
+          phaseText.textContent = certPhase ? certPhase.textContent : 'Unknown Phase';
+          svg.appendChild(phaseText);
+
+          var dateText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          dateText.setAttribute('x', '400');
+          dateText.setAttribute('y', '500');
+          dateText.setAttribute('text-anchor', 'middle');
+          dateText.setAttribute('font-family', 'JetBrains Mono, monospace');
+          dateText.setAttribute('font-size', '14');
+          dateText.setAttribute('fill', '#7a7a78');
+          dateText.textContent = certDate ? certDate.textContent : new Date().toLocaleDateString();
+          svg.appendChild(dateText);
+
+          var svgData = new XMLSerializer().serializeToString(svg);
+          var blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = 'vibe-coding-certificate-' + (certPhase ? certPhase.textContent.replace(/\s+/g, '-') : 'phase') + '.svg';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        });
       })();
 
       // Keyboard shortcuts

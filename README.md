@@ -220,31 +220,31 @@ This repository contains **46 comprehensive sections** covering every aspect of 
 
 ### 📚 Resources (Sections 25-45)
 
-| Section | Topic | Status |
-|---------|-------|--------|
-| [25-cheat-sheets](./25-cheat-sheets/) | Quick References | 🟡 In Progress |
-| [26-awesome-prompts](./26-awesome-prompts/) | Prompt Library | 🟡 In Progress |
-| [27-case-studies](./27-case-studies/) | Real-World Analysis | 🟡 In Progress |
-| [28-failure-patterns](./28-failure-patterns/) | What NOT to Do | 🟡 In Progress |
-| [29-interview-prep](./29-interview-prep/) | Interview Questions | 🟡 In Progress |
-| [30-spec-driven-development](./30-spec-driven-development/) | **Specs > Prompts** | ✅ Complete |
-| [31-ai-cost-engineering](./31-ai-cost-engineering/) | **Token Costs & Budgets** | ✅ Complete |
-| [32-agent-safety-governance](./32-agent-safety-governance/) | **Agent Safety & Governance** | ✅ Complete |
-| [33-enterprise-governance](./33-enterprise-governance/) | **Enterprise Governance & Reliability** | ✅ Complete |
-| [34-community-case-studies](./34-community-case-studies/) | **Case Studies & Failure Analyses** | ✅ Complete |
-| [35-starter-kits](./35-starter-kits/) | **Starter Kits & Boilerplates** | ✅ Complete |
-| [36-kubernetes-deployment](./36-kubernetes-deployment/) | **Kubernetes Deployment** | ✅ Complete |
-| [37-self-assessment](./37-self-assessment/) | **Self-Assessment & Certification** | ✅ Complete |
-| [38-interactive-quizzes](./38-interactive-quizzes/) | **Quizzes & Certification Track** | ✅ Complete |
-| [39-video-tutorials](./39-video-tutorials/) | **Video Tutorials & Walkthroughs** | ✅ Complete |
-| [40-community-discussion](./40-community-discussion/) | **Community & Contribution Tooling** | ✅ Complete |
-| [41-ecosystem-integrations](./41-ecosystem-integrations/) | **MCP Marketplace & Agent Templates** | ✅ Complete |
-| [42-aiops-ai-workloads](./42-aiops-ai-workloads/) | **AIOps for AI Workloads** | ✅ Complete |
-| [43-agent-collaboration](./43-agent-collaboration/) | **Agent-to-Agent Collaboration** | ✅ Complete |
-| [44-compliance-automation](./44-compliance-automation/) | **Advanced Compliance Automation** | ✅ Complete |
-| [45-multi-modal-vibe-coding](./45-multi-modal-vibe-coding/) | **Multi-Modal Vibe Coding** | ✅ Complete |
+| Section | Topic | Difficulty | Status |
+|---------|-------|------------|--------|
+| [25-cheat-sheets](./25-cheat-sheets/) | Quick References | — | 🟡 In Progress |
+| [26-awesome-prompts](./26-awesome-prompts/) | Prompt Library | — | 🟡 In Progress |
+| [27-case-studies](./27-case-studies/) | Real-World Analysis | — | 🟡 In Progress |
+| [28-failure-patterns](./28-failure-patterns/) | What NOT to Do | — | 🟡 In Progress |
+| [29-interview-prep](./29-interview-prep/) | Interview Questions | — | 🟡 In Progress |
+| [30-spec-driven-development](./30-spec-driven-development/) | **Specs > Prompts** | 🟡 Intermediate | ✅ Complete |
+| [31-ai-cost-engineering](./31-ai-cost-engineering/) | **Token Costs & Budgets** | 🟡 Intermediate | ✅ Complete |
+| [32-agent-safety-governance](./32-agent-safety-governance/) | **Agent Safety & Governance** | 🟡 Intermediate | ✅ Complete |
+| [33-enterprise-governance](./33-enterprise-governance/) | **Enterprise Governance & Reliability** | 🟡 Intermediate | ✅ Complete |
+| [34-community-case-studies](./34-community-case-studies/) | **Case Studies & Failure Analyses** | 🟡 Intermediate | ✅ Complete |
+| [35-starter-kits](./35-starter-kits/) | **Starter Kits & Boilerplates** | 🟡 Intermediate | ✅ Complete |
+| [36-kubernetes-deployment](./36-kubernetes-deployment/) | **Kubernetes Deployment** | 🔴 Advanced | ✅ Complete |
+| [37-self-assessment](./37-self-assessment/) | **Self-Assessment & Certification** | 🟡 Intermediate | ✅ Complete |
+| [38-interactive-quizzes](./38-interactive-quizzes/) | **Quizzes & Certification Track** | 🟡 Intermediate | ✅ Complete |
+| [39-video-tutorials](./39-video-tutorials/) | **Video Tutorials & Walkthroughs** | 🟢 Beginner | ✅ Complete |
+| [40-community-discussion](./40-community-discussion/) | **Community & Contribution Tooling** | 🟢 Beginner | ✅ Complete |
+| [41-ecosystem-integrations](./41-ecosystem-integrations/) | **MCP Marketplace & Agent Templates** | 🟡 Intermediate | ✅ Complete |
+| [42-aiops-ai-workloads](./42-aiops-ai-workloads/) | **AIOps for AI Workloads** | 🔴 Advanced | ✅ Complete |
+| [43-agent-collaboration](./43-agent-collaboration/) | **Agent-to-Agent Collaboration** | 🔴 Advanced | ✅ Complete |
+| [44-compliance-automation](./44-compliance-automation/) | **Advanced Compliance Automation** | 🔴 Advanced | ✅ Complete |
+| [45-multi-modal-vibe-coding](./45-multi-modal-vibe-coding/) | **Multi-Modal Vibe Coding** | 🟡 Intermediate | ✅ Complete |
 
-**Legend:** ✅ Complete | 🟡 In Progress | 🔴 Planned
+**Legend:** ✅ Complete | 🟡 In Progress | 🔴 Planned | 🟢 Beginner | 🟡 Intermediate | 🔴 Advanced
 
 ---
 
