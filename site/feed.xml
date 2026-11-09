@@ -5,13 +5,13 @@
     <link>https://vibingcode.dev/</link>
     <description>The complete open-source handbook for AI-assisted software development.</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 05 Nov 2026 10:22:50 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 09 Nov 2026 05:28:20 GMT</lastBuildDate>
     <atom:link href="https://vibingcode.dev/feed.xml" rel="self" type="application/rss+xml" />
       <item>
     <title>Introduction</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/00-introduction/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/00-introduction/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>Welcome &amp; Overview</description>
     <category>unknown</category>
   </item>
@@ -19,7 +19,7 @@
     <title>What Is Vibe Coding</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/01-what-is-vibe-coding/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/01-what-is-vibe-coding/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>Philosophy &amp; Mindset</description>
     <category>unknown</category>
   </item>
@@ -27,7 +27,7 @@
     <title>How To Start</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/02-how-to-start/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/02-how-to-start/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>Getting Started Guide</description>
     <category>unknown</category>
   </item>
@@ -35,7 +35,7 @@
     <title>Hardware Guide</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/03-hardware-guide/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/03-hardware-guide/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>Setup Requirements</description>
     <category>unknown</category>
   </item>
@@ -43,7 +43,7 @@
     <title>AI Models</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/04-ai-models/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/04-ai-models/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>Model Comparison</description>
     <category>unknown</category>
   </item>
@@ -51,7 +51,7 @@
     <title>AI Tools</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/05-ai-tools/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/05-ai-tools/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>Tool Ecosystem</description>
     <category>unknown</category>
   </item>
@@ -59,7 +59,7 @@
     <title>IDEs Editors</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/06-ides-editors/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/06-ides-editors/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>AI-Native IDEs</description>
     <category>unknown</category>
   </item>
@@ -67,15 +67,15 @@
     <title>Prompt Engineering</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/07-prompt-engineering/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/07-prompt-engineering/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
-    <description>**Prompt Templates &amp; Techniques**</description>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
+    <description>Prompt Templates &amp; Techniques</description>
     <category>unknown</category>
   </item>
   <item>
     <title>Frontend</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/08-frontend/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/08-frontend/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>React, Next.js, TypeScript</description>
     <category>unknown</category>
   </item>
@@ -83,7 +83,7 @@
     <title>Backend</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/09-backend/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/09-backend/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>APIs, Microservices</description>
     <category>unknown</category>
   </item>
@@ -91,7 +91,7 @@
     <title>Databases</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/10-databases/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/10-databases/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>SQL, NoSQL, Vector DBs</description>
     <category>unknown</category>
   </item>
@@ -99,7 +99,7 @@
     <title>DevOps Cloud</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/11-devops-cloud/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/11-devops-cloud/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>Docker, K8s, Cloud</description>
     <category>unknown</category>
   </item>
@@ -107,7 +107,7 @@
     <title>Hosting Platforms</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/12-hosting-platforms/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/12-hosting-platforms/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>Deployment Options</description>
     <category>unknown</category>
   </item>
@@ -115,7 +115,7 @@
     <title>Testing Debugging</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/13-testing-debugging/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/13-testing-debugging/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>Quality Assurance</description>
     <category>unknown</category>
   </item>
@@ -123,7 +123,7 @@
     <title>Security</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/14-security/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/14-security/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>Security Best Practices</description>
     <category>unknown</category>
   </item>
@@ -131,15 +131,15 @@
     <title>Offline Vibe Coding</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/15-offline-vibe-coding/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/15-offline-vibe-coding/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
-    <description>**Local AI &amp; Privacy**</description>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
+    <description>Local AI &amp; Privacy</description>
     <category>unknown</category>
   </item>
   <item>
     <title>Open Source Projects</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/16-open-source-projects/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/16-open-source-projects/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>Project Ideas</description>
     <category>unknown</category>
   </item>
@@ -147,7 +147,7 @@
     <title>Real World Workflows</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/17-real-world-workflows/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/17-real-world-workflows/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>Production Workflows</description>
     <category>unknown</category>
   </item>
@@ -155,7 +155,7 @@
     <title>Monetization</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/18-monetization/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/18-monetization/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>Making Money</description>
     <category>unknown</category>
   </item>
@@ -163,7 +163,7 @@
     <title>Freelancing</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/19-freelancing/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/19-freelancing/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>Client Work</description>
     <category>unknown</category>
   </item>
@@ -171,7 +171,7 @@
     <title>System Design</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/20-system-design/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/20-system-design/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>Architecture Patterns</description>
     <category>unknown</category>
   </item>
@@ -179,7 +179,7 @@
     <title>Mobile Development</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/21-mobile-development/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/21-mobile-development/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>React Native, Flutter</description>
     <category>unknown</category>
   </item>
@@ -187,7 +187,7 @@
     <title>AI Agents</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/22-ai-agents/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/22-ai-agents/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>Autonomous Agents</description>
     <category>unknown</category>
   </item>
@@ -195,7 +195,7 @@
     <title>RAG Vector Databases</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/23-rag-vector-databases/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/23-rag-vector-databases/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>RAG Systems</description>
     <category>unknown</category>
   </item>
@@ -203,7 +203,7 @@
     <title>Automation</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/24-automation/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/24-automation/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>CI/CD, Scripts</description>
     <category>unknown</category>
   </item>
@@ -211,7 +211,7 @@
     <title>Cheat Sheets</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/25-cheat-sheets/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/25-cheat-sheets/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>Quick References</description>
     <category>unknown</category>
   </item>
@@ -219,7 +219,7 @@
     <title>Awesome Prompts</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/26-awesome-prompts/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/26-awesome-prompts/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>Prompt Library</description>
     <category>unknown</category>
   </item>
@@ -227,7 +227,7 @@
     <title>Case Studies</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/27-case-studies/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/27-case-studies/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>Real-World Analysis</description>
     <category>unknown</category>
   </item>
@@ -235,7 +235,7 @@
     <title>Failure Patterns</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/28-failure-patterns/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/28-failure-patterns/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>What NOT to Do</description>
     <category>unknown</category>
   </item>
@@ -243,7 +243,7 @@
     <title>Interview Prep</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/29-interview-prep/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/29-interview-prep/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
     <description>Interview Questions</description>
     <category>unknown</category>
   </item>
@@ -251,128 +251,128 @@
     <title>Spec Driven Development</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/30-spec-driven-development/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/30-spec-driven-development/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
-    <description>**Specs &gt; Prompts**</description>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
+    <description>Specs &gt; Prompts</description>
     <category>intermediate</category>
   </item>
   <item>
     <title>AI Cost Engineering</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/31-ai-cost-engineering/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/31-ai-cost-engineering/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
-    <description>**Token Costs &amp; Budgets**</description>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
+    <description>Token Costs &amp; Budgets</description>
     <category>intermediate</category>
   </item>
   <item>
     <title>Agent Safety Governance</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/32-agent-safety-governance/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/32-agent-safety-governance/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
-    <description>**Agent Safety &amp; Governance**</description>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
+    <description>Agent Safety &amp; Governance</description>
     <category>intermediate</category>
   </item>
   <item>
     <title>Enterprise Governance</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/33-enterprise-governance/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/33-enterprise-governance/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
-    <description>**Enterprise Governance &amp; Reliability**</description>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
+    <description>Enterprise Governance &amp; Reliability</description>
     <category>intermediate</category>
   </item>
   <item>
     <title>Community Case Studies</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/34-community-case-studies/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/34-community-case-studies/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
-    <description>**Case Studies &amp; Failure Analyses**</description>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
+    <description>Case Studies &amp; Failure Analyses</description>
     <category>intermediate</category>
   </item>
   <item>
     <title>Starter Kits</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/35-starter-kits/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/35-starter-kits/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
-    <description>**Starter Kits &amp; Boilerplates**</description>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
+    <description>Starter Kits &amp; Boilerplates</description>
     <category>intermediate</category>
   </item>
   <item>
     <title>Kubernetes Deployment</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/36-kubernetes-deployment/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/36-kubernetes-deployment/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
-    <description>**Kubernetes Deployment**</description>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
+    <description>Kubernetes Deployment</description>
     <category>advanced</category>
   </item>
   <item>
     <title>Self Assessment</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/37-self-assessment/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/37-self-assessment/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
-    <description>**Self-Assessment &amp; Certification**</description>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
+    <description>Self-Assessment &amp; Certification</description>
     <category>intermediate</category>
   </item>
   <item>
     <title>Interactive Quizzes</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/38-interactive-quizzes/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/38-interactive-quizzes/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
-    <description>**Quizzes &amp; Certification Track**</description>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
+    <description>Quizzes &amp; Certification Track</description>
     <category>intermediate</category>
   </item>
   <item>
     <title>Video Tutorials</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/39-video-tutorials/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/39-video-tutorials/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
-    <description>**Video Tutorials &amp; Walkthroughs**</description>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
+    <description>Video Tutorials &amp; Walkthroughs</description>
     <category>beginner</category>
   </item>
   <item>
     <title>Community Discussion</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/40-community-discussion/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/40-community-discussion/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
-    <description>**Community &amp; Contribution Tooling**</description>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
+    <description>Community &amp; Contribution Tooling</description>
     <category>beginner</category>
   </item>
   <item>
     <title>Ecosystem Integrations</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/41-ecosystem-integrations/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/41-ecosystem-integrations/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
-    <description>**MCP Marketplace &amp; Agent Templates**</description>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
+    <description>MCP Marketplace &amp; Agent Templates</description>
     <category>intermediate</category>
   </item>
   <item>
     <title>Aiops AI Workloads</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/42-aiops-ai-workloads/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/42-aiops-ai-workloads/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
-    <description>**AIOps for AI Workloads**</description>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
+    <description>AIOps for AI Workloads</description>
     <category>advanced</category>
   </item>
   <item>
     <title>Agent Collaboration</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/43-agent-collaboration/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/43-agent-collaboration/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
-    <description>**Agent-to-Agent Collaboration**</description>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
+    <description>Agent-to-Agent Collaboration</description>
     <category>advanced</category>
   </item>
   <item>
     <title>Compliance Automation</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/44-compliance-automation/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/44-compliance-automation/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
-    <description>**Advanced Compliance Automation**</description>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
+    <description>Advanced Compliance Automation</description>
     <category>advanced</category>
   </item>
   <item>
     <title>Multi Modal Vibe Coding</title>
     <link>https://github.com/hacrex/the-vibe-coding-handbook/tree/main/45-multi-modal-vibe-coding/</link>
     <guid isPermaLink="true">https://github.com/hacrex/the-vibe-coding-handbook/tree/main/45-multi-modal-vibe-coding/</guid>
-    <pubDate>Thu, 05 Nov 2026 10:22:50 GMT</pubDate>
-    <description>**Multi-Modal Vibe Coding**</description>
+    <pubDate>Mon, 09 Nov 2026 05:28:20 GMT</pubDate>
+    <description>Multi-Modal Vibe Coding</description>
     <category>intermediate</category>
   </item>
   </channel>
