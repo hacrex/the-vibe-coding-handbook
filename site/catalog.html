@@ -257,6 +257,7 @@
         <select class="catalog-filter" id="catalogStatus">
           <option value="">All Status</option>
           <option value="complete">Complete</option>
+          <option value="in-progress">In Progress</option>
           <option value="planned">Planned</option>
         </select>
         <select class="catalog-filter" id="catalogDifficulty">
@@ -370,6 +371,11 @@
               lessonPath = 'phases/' + phaseSlug + '/' + lessonSlug;
             }
             var localPath = 'lesson.html?path=' + lessonPath;
+            // Merge per-device localStorage completion with static data.js status
+            var effectiveStatus = l.status;
+            if (window.AIFSProgress && lessonPath && window.AIFSProgress.isLessonComplete(lessonPath)) {
+              effectiveStatus = 'complete';
+            }
             allRows.push({
               phase: p.id,
               phaseName: p.name,
@@ -377,7 +383,7 @@
               name: l.name,
               type: l.type,
               lang: l.lang,
-              status: l.status,
+              status: effectiveStatus,
               url: localPath
             });
           }

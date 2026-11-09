@@ -1743,6 +1743,12 @@
               lessonPathVal = 'phases/' + pSlug + '/' + lSlug;
             }
 
+            // Merge per-device localStorage completion with static data.js status
+            var effectiveStatus = l.status;
+            if (window.AIFSProgress && lessonPathVal && window.AIFSProgress.isLessonComplete(lessonPathVal)) {
+              effectiveStatus = 'complete';
+            }
+
             flatLessons.push({
               phaseIndex: i,
               lessonIndex: j,
@@ -1751,12 +1757,12 @@
               phaseSlug: pSlug,
               lessonName: l.name,
               lessonSlug: lSlug,
-              status: l.status,
+              status: effectiveStatus,
               type: l.type,
               lang: l.lang,
               url: l.url,
               path: lessonPathVal,
-              isReadable: l.status === 'complete' || !!l.url
+              isReadable: effectiveStatus === 'complete' || !!l.url
             });
             if (pSlug === currentPhaseSlug && lSlug === currentLessonSlug) {
               currentPhaseIndex = i;

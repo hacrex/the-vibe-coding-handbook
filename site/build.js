@@ -27,7 +27,7 @@ function parseRoadmap(content) {
 
   for (const line of content.split('\n')) {
     // Match phase headers like: ## Phase 0: Setup & Tooling — ✅
-    const phaseMatch = line.match(/^##\s+Phase\s+(\d+).*?—\s*(✅|🚧|⬚)/);
+    const phaseMatch = line.match(/^##\s+Phase\s+(\d+).*(✅|🚧|⬚)/);
     if (phaseMatch) {
       const phaseId = parseInt(phaseMatch[1]);
       const statusEmoji = phaseMatch[2];
