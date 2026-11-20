@@ -435,7 +435,7 @@ Deployment: Vercel
 ## 📚 Recommended Resources
 
 ### Articles & Blogs
-- [The Rise of AI Pair Programmers](https://example.com)
+- [The Rise of AI Pair Programmers](https://github.blog/news-insights/research/research-quantifying-github-copilots-impact-on-developer-productivity-and-happiness/)
 - [Prompt Engineering Best Practices](../07-prompt-engineering/)
 - [From Zero to Ship: A Vibe Coding Journey](../27-case-studies/)
 

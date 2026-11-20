@@ -199,7 +199,7 @@ When one agent finishes and another starts, context must transfer cleanly. Witho
 - src/auth/routes.test.ts (passing)
 
 ## Known issues
-- Token refresh edge case not handled (see TODO in middleware.ts)
+- Token refresh edge cases should be covered by middleware tests and documented before production rollout.
 
 ## Next steps
 - Implement password reset flow

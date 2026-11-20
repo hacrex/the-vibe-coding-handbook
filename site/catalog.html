@@ -42,6 +42,13 @@
       font-size: 1.1rem;
     }
 
+    .catalog-header .catalog-meta {
+      margin-top: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+    }
+
     .catalog-controls {
       display: flex;
       gap: 12px;
@@ -248,9 +255,10 @@
       <div class="catalog-header">
         <h1>Lesson Catalog</h1>
         <p>Every lesson across all 46 phases. Search, filter, sort.</p>
+        <p class="catalog-meta" id="catalogMeta" aria-live="polite"></p>
       </div>
       <div class="catalog-controls">
-        <input type="text" class="catalog-search" id="catalogSearch" placeholder="Search lessons...">
+        <input type="search" class="catalog-search" id="catalogSearch" aria-label="Search lessons, sections, topics, and languages" placeholder="Search lessons, topics, languages...">
         <select class="catalog-filter" id="catalogPhase">
           <option value="">All Phases</option>
         </select>
@@ -321,6 +329,12 @@
       document.addEventListener('DOMContentLoaded', function () {
         updateIcon();
 
+        var catalogMeta = document.getElementById('catalogMeta');
+        if (catalogMeta && typeof CONTENT_META !== 'undefined' && CONTENT_META.generatedAt) {
+          var generated = new Date(CONTENT_META.generatedAt);
+          catalogMeta.textContent = 'Content index generated ' + generated.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) + ' · ' + CONTENT_META.lessonCount + ' lessons · ' + CONTENT_META.glossaryCount + ' glossary terms';
+        }
+
         var btn = document.getElementById('themeToggle');
         if (btn) {
           btn.addEventListener('click', function () {
@@ -383,6 +397,7 @@
               name: l.name,
               type: l.type,
               lang: l.lang,
+              searchText: [p.name, p.desc, l.name, l.type, l.lang].join(' ').toLowerCase(),
               status: effectiveStatus,
               url: localPath
             });
@@ -414,10 +429,7 @@
             if (statusFilter && r.status !== statusFilter) return false;
             if (difficultyFilter && r.difficulty !== difficultyFilter) return false;
             if (query) {
-              return r.name.toLowerCase().indexOf(query) !== -1 ||
-                r.phaseName.toLowerCase().indexOf(query) !== -1 ||
-                r.type.toLowerCase().indexOf(query) !== -1 ||
-                r.lang.toLowerCase().indexOf(query) !== -1;
+              return r.searchText.indexOf(query) !== -1;
             }
             return true;
           });

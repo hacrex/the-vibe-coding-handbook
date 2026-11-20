@@ -125,7 +125,11 @@
     
     for (var i = 0; i < PHASES.length; i++) {
       var p = PHASES[i];
-      if (filter && p.name.toLowerCase().indexOf(filter) === -1 && String(p.id).indexOf(filter) === -1) {
+      var searchable = [p.name, p.desc, String(p.id)];
+      for (var s = 0; s < p.lessons.length; s++) {
+        searchable.push(p.lessons[s].name, p.lessons[s].type, p.lessons[s].lang);
+      }
+      if (filter && searchable.join(' ').toLowerCase().indexOf(filter) === -1) {
         continue;
       }
       var total = p.lessons.length;

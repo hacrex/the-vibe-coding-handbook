@@ -31,7 +31,7 @@ The handbook community gathers in several places. Choose the one that fits your 
 |----------|----------|-------------|
 | **GitHub Discussions** | Handbook questions, feature requests, meta conversation | `github.com/hacrex/the-vibe-coding-handbook/discussions` |
 | **GitHub Issues** | Bug reports, typos, content gaps | `github.com/hacrex/the-vibe-coding-handbook/issues` |
-| **Discord** | Real-time chat, quick questions, pair programming | Link in the handbook README (coming soon) |
+| **GitHub Discussions** | Questions, announcements, and community collaboration | [Open Discussions](https://github.com/hacrex/the-vibe-coding-handbook/discussions) |
 | **Twitter/X** | Public builds, sharing projects, #vibecoding | Post with #vibecoding and tag the handbook |
 | **Reddit** | r/cursor_ai, r/vibecoding, r/LocalLLaMA | Tool-specific communities |
 

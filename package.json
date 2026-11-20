@@ -1,0 +1,17 @@
+{
+  "name": "the-vibe-coding-handbook",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The Vibe Coding Handbook static site and open-source learning guide",
+  "scripts": {
+    "build": "node site/build.js",
+    "audit:readmes": "node scripts/audit-readmes.js",
+    "test:smoke": "node scripts/smoke-test.js",
+    "test:browser": "node scripts/browser-smoke.js",
+    "check": "npm run build && npm run audit:readmes && node --check site/build.js && node --check site/app.js && node --check site/header.js && node --check site/progress.js && npm run test:smoke",
+    "check:generated": "npm run build && git diff --exit-code -- site/data.js site/feed.xml"
+  },
+  "devDependencies": {
+    "playwright": "^1.65.1"
+  }
+}

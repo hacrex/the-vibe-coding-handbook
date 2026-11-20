@@ -246,7 +246,7 @@ Track your progress with these milestones:
 - 💡 **Showcase**: Share your projects in the showcase section
 
 ### Connect With Us
-- 🌐 **Website**: [Coming Soon]
+- 🌐 **Website**: [vibingcode.dev](https://vibingcode.dev/)
 - 💬 **Discord**: [Join Link]
 - 🐦 **Twitter**: [@VibeCodingRepo]
 - 📧 **Newsletter**: [Subscribe Link]

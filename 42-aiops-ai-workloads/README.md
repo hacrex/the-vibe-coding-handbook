@@ -205,7 +205,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: ghcr.io/yourusername/ai-app:latest
+        image: ghcr.io/YOUR_ORG/ai-app:latest
 ```
 
 ### Automated rollback triggers

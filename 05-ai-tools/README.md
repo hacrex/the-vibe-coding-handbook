@@ -1155,7 +1155,7 @@ Generative UI platform from Vercel.
 
 **Pricing:**
 - Free (generous limits)
-- Pro: Coming soon
+- Pro: Check the provider's current pricing and usage limits before adopting it.
 
 **Best For:**
 - UI component generation

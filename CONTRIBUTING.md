@@ -83,8 +83,8 @@ Have ideas for new content?
 
 ```bash
 # Click "Fork" on GitHub, then clone your fork
-git clone https://github.com/YOUR_USERNAME/vibe-coding-zero-to-hero.git
-cd vibe-coding-zero-to-hero
+git clone https://github.com/YOUR_USERNAME/the-vibe-coding-handbook.git
+cd the-vibe-coding-handbook
 ```
 
 ### Step 2: Create a Branch
@@ -104,6 +104,16 @@ Preview your markdown:
 - Use a markdown preview extension in VS Code
 - Check that links work
 - Verify code blocks render correctly
+
+Run the repository checks before opening a pull request:
+
+```bash
+npm ci
+npm run check
+npm run test:browser
+```
+
+The checks audit all README files, validate internal links and HTML metadata, rebuild the site, run JavaScript syntax checks, exercise static routes, and verify the homepage, theme toggle, search, catalog, and lesson flows in Chromium. If source content changes, regenerate committed artifacts with `npm run build` and include the resulting `site/data.js` and `site/feed.xml` updates.
 
 ### Step 5: Commit Your Changes
 

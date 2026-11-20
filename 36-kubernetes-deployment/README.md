@@ -78,10 +78,10 @@ CMD ["node", "server.js"]
 
 ```bash
 # Build
-docker build -t ghcr.io/yourusername/my-app:latest .
+docker build -t ghcr.io/YOUR_ORG/my-app:latest .
 
 # Push to a registry
-docker push ghcr.io/yourusername/my-app:latest
+docker push ghcr.io/YOUR_ORG/my-app:latest
 ```
 
 ---
@@ -112,7 +112,7 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: ghcr.io/yourusername/my-app:latest
+        image: ghcr.io/YOUR_ORG/my-app:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000
@@ -260,7 +260,7 @@ AI-generated code should roll out gradually:
 
 ```bash
 # 1. Deploy new version to 10% of traffic
-kubectl set image deployment/my-app my-app=ghcr.io/yourusername/my-app:v2
+kubectl set image deployment/my-app my-app=ghcr.io/YOUR_ORG/my-app:v2
 
 # 2. Monitor error rate and latency
 kubectl top pods -l app=my-app
