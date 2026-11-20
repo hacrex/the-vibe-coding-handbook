@@ -199,9 +199,9 @@ Before you start building on a starter kit:
 
 ## 🚀 Next Steps
 
-- **Read section [36 — Kubernetes Deployment for Vibe-Coded Apps](./36-kubernetes-deployment/)** for production container orchestration
-- **Read section [34 — Community Case Studies](./34-community-case-studies/)** for real-world starter-kit success and failure stories
-- **Read section [31 — AI Cost Engineering](./31-ai-cost-engineering/)** to budget your starter kit's token usage
+- **Read section [36 — Kubernetes Deployment for Vibe-Coded Apps](../36-kubernetes-deployment/)** for production container orchestration
+- **Read section [34 — Community Case Studies](../34-community-case-studies/)** for real-world starter-kit success and failure stories
+- **Read section [31 — AI Cost Engineering](../31-ai-cost-engineering/)** to budget your starter kit's token usage
 
 ---
 

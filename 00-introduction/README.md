@@ -254,7 +254,7 @@ Track your progress with these milestones:
 ### Contribute
 See something missing? Want to add your experience?
 - Read our [CONTRIBUTING.md](../CONTRIBUTING.md)
-- Check out [open issues](../../../issues)
+- Check out [open issues](https://github.com/hacrex/the-vibe-coding-handbook/issues)
 - Submit pull requests with improvements
 
 ---

@@ -197,9 +197,9 @@ Rate your current agent setup (1 = weak, 5 = strong):
 
 ## 🚀 Next Steps
 
-- **Read section [33 — Enterprise Governance & Production Reliability](./33-enterprise-governance/)** for org-wide guardrails, AI slop prevention, and compliance frameworks.
-- **Read section [31 — AI Cost Engineering](./31-ai-cost-engineering/)** to pair safety with token budgeting.
-- **Read section [22 — AI Agents](./22-ai-agents/)** for agent architecture patterns to build on.
+- **Read section [33 — Enterprise Governance & Production Reliability](../33-enterprise-governance/)** for org-wide guardrails, AI slop prevention, and compliance frameworks.
+- **Read section [31 — AI Cost Engineering](../31-ai-cost-engineering/)** to pair safety with token budgeting.
+- **Read section [22 — AI Agents](../22-ai-agents/)** for agent architecture patterns to build on.
 
 ---
 

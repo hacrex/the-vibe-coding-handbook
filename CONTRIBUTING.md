@@ -201,8 +201,8 @@ Use tables for comparisons:
 Use relative links for internal references:
 
 ```markdown
-[Previous Section](../06-ides-editors/)
-[Next Section](../08-frontend/)
+[Previous Section](06-ides-editors/)
+[Next Section](08-frontend/)
 ```
 
 #### Images
@@ -210,7 +210,7 @@ Use relative links for internal references:
 Place images in `/assets` folder:
 
 ```markdown
-![Description](../assets/section-name/image-name.png)
+![Description](assets/section-name/image-name.png)
 ```
 
 ---
@@ -345,15 +345,15 @@ Choose the appropriate template and fill it out completely.
 
 ### Where to Ask
 
-- **General questions**: Open a [Discussion](../../discussions)
+- **General questions**: Open a [Discussion](https://github.com/hacrex/the-vibe-coding-handbook/discussions)
 - **Specific to contribution**: Comment on related issues/PRs
 - **Urgent matters**: Contact maintainers directly
 
 ### Resources
 
-- [README.md](../README.md) - Project overview
-- [Blueprint.md](../Blueprint.md) - Vision and structure
-- [ROADMAP.md](../ROADMAP.md) - Development timeline
+- [README.md](README.md) - Project overview
+- [Blueprint.md](Blueprint.md) - Vision and structure
+- [ROADMAP.md](ROADMAP.md) - Development timeline
 
 ---
 
@@ -372,6 +372,6 @@ Contributors are recognized in:
 
 **Ready to contribute?**
 
-[Fork the Repo](https://github.com/yourusername/vibe-coding-zero-to-hero/fork) · [View Open Issues](../../issues) · [Read the Blueprint](../Blueprint.md)
+[Fork the Repo](https://github.com/hacrex/the-vibe-coding-handbook/fork) · [View Open Issues](https://github.com/hacrex/the-vibe-coding-handbook/issues) · [Read the Blueprint](Blueprint.md)
 
 </div>

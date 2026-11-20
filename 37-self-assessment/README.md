@@ -170,8 +170,8 @@ You do not need to complete all levels. Stop where your goals require.
 ## 🚀 Next Steps
 
 - **Take the self-assessment** above and note your lowest chapters
-- **Read section [34 — Community Case Studies](./34-community-case-studies/)** to submit your own story
-- **Read section [35 — Starter Kits & Boilerplates](./35-starter-kits/)** to jumpstart your next project
+- **Read section [34 — Community Case Studies](../34-community-case-studies/)** to submit your own story
+- **Read section [35 — Starter Kits & Boilerplates](../35-starter-kits/)** to jumpstart your next project
 
 ---
 

@@ -232,9 +232,9 @@ Rate your organization's AI governance maturity (1 = weak, 5 = strong):
 
 ## 🚀 Next Steps
 
-- **Read section [32 — AI Agent Safety & Governance](./32-agent-safety-governance/)** for session-level agent controls (checkpoints, spend limits, MCP security).
-- **Read section [31 — AI Cost Engineering](./31-ai-cost-engineering/)** to track cost per shipped feature.
-- **Read section [14 — Security](./14-security/)** for vulnerability statistics and secure coding practices with AI.
+- **Read section [32 — AI Agent Safety & Governance](../32-agent-safety-governance/)** for session-level agent controls (checkpoints, spend limits, MCP security).
+- **Read section [31 — AI Cost Engineering](../31-ai-cost-engineering/)** to track cost per shipped feature.
+- **Read section [14 — Security](../14-security/)** for vulnerability statistics and secure coding practices with AI.
 
 ---
 

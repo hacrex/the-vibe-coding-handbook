@@ -338,9 +338,9 @@ kubectl rollout status deployment/my-app
 
 ## 🚀 Next Steps
 
-- **Read section [37 — Self-Assessment & Certification Track](./37-self-assessment/)** to validate your Kubernetes knowledge
-- **Read section [32 — AI Agent Safety & Governance](./32-agent-safety-governance/)** for session-level agent controls before deploying agent-written code
-- **Read section [11 — DevOps & Cloud](./11-devops-cloud/)** for CI/CD pipelines and cloud fundamentals
+- **Read section [37 — Self-Assessment & Certification Track](../37-self-assessment/)** to validate your Kubernetes knowledge
+- **Read section [32 — AI Agent Safety & Governance](../32-agent-safety-governance/)** for session-level agent controls before deploying agent-written code
+- **Read section [11 — DevOps & Cloud](../11-devops-cloud/)** for CI/CD pipelines and cloud fundamentals
 
 ---
 

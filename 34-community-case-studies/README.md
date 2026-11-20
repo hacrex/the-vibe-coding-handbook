@@ -241,9 +241,9 @@ Before you ship your next AI-built project:
 
 ## 🚀 Next Steps
 
-- **Read section [35 — Starter Kits & Boilerplates](./35-starter-kits/)** to start your next project with guardrails pre-configured
-- **Read section [14 — Security](./14-security/)** for secure coding practices with AI
-- **Read section [32 — AI Agent Safety & Governance](./32-agent-safety-governance/)** for session-level agent controls
+- **Read section [35 — Starter Kits & Boilerplates](../35-starter-kits/)** to start your next project with guardrails pre-configured
+- **Read section [14 — Security](../14-security/)** for secure coding practices with AI
+- **Read section [32 — AI Agent Safety & Governance](../32-agent-safety-governance/)** for session-level agent controls
 
 ---
 

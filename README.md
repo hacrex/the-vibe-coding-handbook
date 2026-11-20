@@ -426,13 +426,13 @@ This is a **community-driven** project. We welcome contributions of all kinds!
 ### Contribution Guidelines
 
 1. Read our [Contributing Guide](CONTRIBUTING.md)
-2. Check existing [Issues](../../issues) before starting
+2. Check existing [Issues](https://github.com/hacrex/the-vibe-coding-handbook/issues) before starting
 3. Follow our [Markdown Style Guide](CONTRIBUTING.md#markdown-standards)
 4. Submit a Pull Request with clear description
 
 ### Join the Community
 
-- 💬 Discussions: [GitHub Discussions](../../discussions)
+- 💬 Discussions: [GitHub Discussions](https://github.com/hacrex/the-vibe-coding-handbook/discussions)
 - 🐦 Twitter: [@YourHandle](#) *(coming soon)*
 - 💻 Discord: *(coming soon)*
 
