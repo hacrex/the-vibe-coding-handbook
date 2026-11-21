@@ -21,12 +21,15 @@ const OUTPUT_PATH = path.join(__dirname, 'data.js');
 const GITHUB_BASE = 'https://github.com/hacrex/the-vibe-coding-handbook/tree/main/';
 
 // Keep generated files stable across repeated builds. CI can override this with
-// BUILD_DATE; otherwise use the latest source commit date when Git metadata is
-// available, and fall back to the current time for source archives.
+// BUILD_DATE; otherwise use the latest commit affecting source content when Git
+// metadata is available, and fall back to the current time for source archives.
 function getBuildDate() {
   if (process.env.BUILD_DATE) return new Date(process.env.BUILD_DATE);
   try {
-    return new Date(execFileSync('git', ['log', '-1', '--format=%cI'], { encoding: 'utf8' }).trim());
+    return new Date(execFileSync('git', [
+      'log', '-1', '--format=%cI', '--',
+      'README.md', 'ROADMAP.md', 'glossary/terms.md'
+    ], { encoding: 'utf8' }).trim());
   } catch (_) {
     return new Date();
   }
