@@ -44,8 +44,9 @@ function checkMarkdown(file) {
   if (fenceCount % 2 !== 0) reportFailure(file, '', 'unclosed fenced code block');
 
   const headings = [];
-  for (let i = 0; i < lines.length; i++) {
-    const match = lines[i].match(/^(#{1,6})\s+(.+?)\s*#*$/);
+  const contentLines = text.split('\n');
+  for (let i = 0; i < contentLines.length; i++) {
+    const match = contentLines[i].match(/^(#{1,6})\s+(.+?)\s*#*$/);
     if (!match) continue;
     const level = match[1].length;
     headings.push({ level, line: i + 1 });
